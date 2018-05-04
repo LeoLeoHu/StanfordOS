@@ -81,12 +81,18 @@ fn indexing() {
 
 #[test]
 fn mut_indexing() {
-    let mut storage = [0u8; 1024];
+    let mut storage = [10u8; 1024];
     let mut stack_vec = StackVec::with_len(&mut storage, 3);
 
-    assert_eq!(stack_vec[0], 0);
-    assert_eq!(stack_vec[1], 0);
-    assert_eq!(stack_vec[2], 0);
+    stack_vec.push(16).expect("Ok");
+    stack_vec.push(16).expect("Ok");
+
+    assert_eq!(stack_vec.capacity(), 1024);
+    assert_eq!(stack_vec[0], 10);
+    assert_eq!(stack_vec[1], 10);
+    assert_eq!(stack_vec[2], 10);
+    assert_eq!(stack_vec[3], 16);
+    assert_eq!(stack_vec[4], 16);
 
     stack_vec[0] = 100;
     stack_vec[1] = 88;
@@ -202,3 +208,21 @@ fn as_slice() {
     assert_eq!(stack_vec.as_slice(), &[102]);
     assert_eq!(stack_vec.as_mut_slice(), &mut [102]);
 }
+
+// By CHEN
+#[test]
+fn remove_insert() {
+    let mut storage = [0, 1, 2, 3, 4, 5];
+    let mut stack_vec = StackVec::with_len(&mut storage, 6);
+
+    stack_vec.remove(0);
+    assert_eq!(stack_vec.as_slice(), &[1, 2, 3, 4, 5]);
+    stack_vec.insert(0, 6).expect("cap 6");
+    assert_eq!(stack_vec.as_slice(), &[6, 1, 2, 3, 4, 5]);
+    // assert!(stack_vec.insert(2, 0).is_err());
+    stack_vec.remove(1);
+    assert_eq!(stack_vec.as_slice(), &[6, 2, 3, 4, 5]);
+    stack_vec.insert(5, 0).expect("cap 6");
+    assert_eq!(stack_vec.as_slice(), &[6, 2, 3, 4, 5, 0]);
+}
+

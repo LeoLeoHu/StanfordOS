@@ -1,0 +1,2 @@
+We construct the Stackvec based on the reference of storage. And the StackVec makes no sense when the storage is no valid. So it's vital to make sure that the storage outlives the StackVec.
+StackVec would refer to NONSENSE if lifetime-bound isn't forced by Rust when storage is no more valid during the runtime.

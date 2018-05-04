@@ -1,0 +1,2 @@
+Because our mini-progrm doesn't have the operating system to allocate memory automically.
+That's: we're allocating space on the size-fixed array, so it may fail when running out of the space.
