@@ -1,0 +1,2 @@
+Implement method default()/string()/number() for struct Builder;
+Implement trait ToString to_string() to convert struct Builder to string with specific formation for the assert_eq!().

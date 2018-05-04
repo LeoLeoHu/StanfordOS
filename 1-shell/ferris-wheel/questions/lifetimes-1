@@ -1,0 +1,2 @@
+Comprehend the structure of "struct xxx<'a>(&'a str);", "impl <'a> xxx<'a>" and "fn xxxx(&self) -> &'a str {}";
+Understand the difference between reference with lifetime of the instance(self) and reference with lifetime of the original slice(str).
