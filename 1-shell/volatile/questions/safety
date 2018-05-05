@@ -1,0 +1,2 @@
+The procedure of dereferencing a raw pointer should be placed in the unsafe block.
+Read/write method just has a unsafe block, and they don't dereference a raw pointer directly.
