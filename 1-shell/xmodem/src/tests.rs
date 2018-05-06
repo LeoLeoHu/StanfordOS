@@ -84,7 +84,7 @@ fn test_expect_byte() {
 
 #[test]
 fn test_expect_byte_or_cancel() {
-    let mut buffer = vec![2, 0];
+    let mut buffer = vec![2, 0, 20];
     let b = Xmodem::new(Cursor::new(buffer.as_mut_slice()))
         .expect_byte_or_cancel(2, "it's a 2")
         .expect("got a 2");
@@ -145,7 +145,7 @@ fn test_can_in_packet_and_checksum() {
 
 #[test]
 fn test_transmit_reported_bytes() {
-    let (input, mut output) = ([0u8; 50], [0u8; 128]);
+    let (input, mut output) = ([96u8; 50], [0u8; 128]);
     let (tx, rx) = pipe();
     let tx_thread = std::thread::spawn(move || Xmodem::transmit(&input[..], rx));
     let rx_thread = std::thread::spawn(move || Xmodem::receive(tx, &mut output[..]));

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Progress","Enum representing how much progress has been made transmitting/receiving."]],"struct":[["Xmodem","Implementation of the XMODEM protocol."]],"type":[["ProgressFn","Type for progress callbacks."]]});

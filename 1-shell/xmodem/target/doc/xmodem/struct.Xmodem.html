@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Xmodem` struct in crate `xmodem`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Xmodem">
+
+    <title>xmodem::Xmodem - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
+        
+        <p class='location'>Struct Xmodem</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.transmit">transmit</a><a href="#method.transmit_with_progress">transmit_with_progress</a><a href="#method.receive">receive</a><a href="#method.receive_with_progress">receive_with_progress</a><a href="#method.new">new</a><a href="#method.new_with_progress">new_with_progress</a><a href="#method.read_packet">read_packet</a><a href="#method.write_packet">write_packet</a><a href="#method.flush">flush</a></div></div><p class='location'><a href='index.html'>xmodem</a></p><script>window.sidebarCurrent = {name: 'Xmodem', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>xmodem</a>::<wbr><a class="struct" href=''>Xmodem</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/xmodem/lib.rs.html#18-23' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Xmodem&lt;R&gt; { /* fields omitted */ }</pre><div class='docblock'><p>Implementation of the XMODEM protocol.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl <a class="struct" href="../xmodem/struct.Xmodem.html" title="struct xmodem::Xmodem">Xmodem</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt;</code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#25-115' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.transmit' class="method"><span id='transmit.v' class='invisible'><code>pub fn <a href='#method.transmit' class='fnname'>transmit</a>&lt;R, W&gt;(data: R, to: W) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a>,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#32-36' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Transmits <code>data</code> to the receiver <code>to</code> using the XMODEM protocol. If the
+length of the total data yielded by <code>data</code> is not a multiple of 128
+bytes, the data is padded with zeroes and sent to the receiver.</p>
+
+<p>Returns the number of bytes written to <code>to</code>, excluding padding zeroes.</p>
+</div><h4 id='method.transmit_with_progress' class="method"><span id='transmit_with_progress.v' class='invisible'><code>pub fn <a href='#method.transmit_with_progress' class='fnname'>transmit_with_progress</a>&lt;R, W&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;data: R, <br>&nbsp;&nbsp;&nbsp;&nbsp;to: W, <br>&nbsp;&nbsp;&nbsp;&nbsp;f: <a class="type" href="../xmodem/type.ProgressFn.html" title="type xmodem::ProgressFn">ProgressFn</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a>,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#46-74' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Transmits <code>data</code> to the receiver <code>to</code> using the XMODEM protocol. If the
+length of the total data yielded by <code>data</code> is not a multiple of 128
+bytes, the data is padded with zeroes and sent to the receiver.</p>
+
+<p>The function <code>f</code> is used as a callback to indicate progress throughout
+the transmission. See the [<code>Progress</code>] enum for more information.</p>
+
+<p>Returns the number of bytes written to <code>to</code>, excluding padding zeroes.</p>
+</div><h4 id='method.receive' class="method"><span id='receive.v' class='invisible'><code>pub fn <a href='#method.receive' class='fnname'>receive</a>&lt;R, W&gt;(from: R, into: W) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#79-83' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Receives <code>data</code> from <code>from</code> using the XMODEM protocol and writes it into
+<code>into</code>. Returns the number of bytes read from <code>from</code>, a multiple of 128.</p>
+</div><h4 id='method.receive_with_progress' class="method"><span id='receive_with_progress.v' class='invisible'><code>pub fn <a href='#method.receive_with_progress' class='fnname'>receive_with_progress</a>&lt;R, W&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;from: R, <br>&nbsp;&nbsp;&nbsp;&nbsp;into: W, <br>&nbsp;&nbsp;&nbsp;&nbsp;f: <a class="type" href="../xmodem/type.ProgressFn.html" title="type xmodem::ProgressFn">ProgressFn</a><br>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;R: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;W: <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#90-114' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Receives <code>data</code> from <code>from</code> using the XMODEM protocol and writes it into
+<code>into</code>. Returns the number of bytes read from <code>from</code>, a multiple of 128.</p>
+
+<p>The function <code>f</code> is used as a callback to indicate progress throughout
+the reception. See the [<code>Progress</code>] enum for more information.</p>
+</div></div><h3 id='impl-1' class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Read.html" title="trait std::io::Read">Read</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/std/io/trait.Write.html" title="trait std::io::Write">Write</a>&gt; <a class="struct" href="../xmodem/struct.Xmodem.html" title="struct xmodem::Xmodem">Xmodem</a>&lt;T&gt;</code><a href='#impl-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#117-265' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>pub fn <a href='#method.new' class='fnname'>new</a>(inner: T) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#121-123' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a new <code>Xmodem</code> instance with the internal reader/writer set to
+<code>inner</code>. The returned instance can be used for both receiving
+(downloading) and sending (uploading).</p>
+</div><h4 id='method.new_with_progress' class="method"><span id='new_with_progress.v' class='invisible'><code>pub fn <a href='#method.new_with_progress' class='fnname'>new_with_progress</a>(inner: T, f: <a class="type" href="../xmodem/type.ProgressFn.html" title="type xmodem::ProgressFn">ProgressFn</a>) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#130-132' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a new <code>Xmodem</code> instance with the internal reader/writer set to
+<code>inner</code>. The returned instance can be used for both receiving
+(downloading) and sending (uploading). The function <code>f</code> is used as a
+callback to indicate progress throughout the transfer. See the
+[<code>Progress</code>] enum for more information.</p>
+</div><h4 id='method.read_packet' class="method"><span id='read_packet.v' class='invisible'><code>pub fn <a href='#method.read_packet' class='fnname'>read_packet</a>(&amp;mut self, buf: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;mut [</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#217-219' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Reads (downloads) a single packet from the inner stream using the XMODEM
+protocol. On success, returns the number of bytes read (always 128).</p>
+
+<p>The progress callback is called with <code>Progress::Start</code> when reception
+for the first packet has started and subsequently with
+<code>Progress::Packet</code> when a packet is received successfully.</p>
+
+<h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
+<p>Returns an error if reading or writing to the inner stream fails at any
+point. Also returns an error if the XMODEM protocol indicates an error.
+In particular, an <code>InvalidData</code> error is returned when:</p>
+
+<ul>
+<li>The sender&#39;s first byte for a packet isn&#39;t <code>EOT</code> or <code>SOH</code>.</li>
+<li>The sender doesn&#39;t send a second <code>EOT</code> after the first.</li>
+<li>The received packet numbers don&#39;t match the expected values.</li>
+</ul>
+
+<p>An error of kind <code>Interrupted</code> is returned if a packet checksum fails.</p>
+
+<p>An error of kind <code>ConnectionAborted</code> is returned if a <code>CAN</code> byte is
+received when not expected.</p>
+
+<p>An error of kind <code>UnexpectedEof</code> is returned if <code>buf.len() &lt; 128</code>.</p>
+</div><h4 id='method.write_packet' class="method"><span id='write_packet.v' class='invisible'><code>pub fn <a href='#method.write_packet' class='fnname'>write_packet</a>(&amp;mut self, buf: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#251-253' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Sends (uploads) a single packet to the inner stream using the XMODEM
+protocol. If <code>buf</code> is empty, end of transmissions is sent. Users of this
+interface should ensure that <code>write_packet(&amp;[])</code> is called when data
+transmission is complete. On success, returns the number of bytes
+written.</p>
+
+<p>The progress callback is called with <code>Progress::Waiting</code> before waiting
+for the receiver&#39;s <code>NAK</code>, <code>Progress::Start</code> when transmission of the
+first packet has started and subsequently with <code>Progress::Packet</code> when a
+packet is sent successfully.</p>
+
+<h1 id='errors-1' class='section-header'><a href='#errors-1'>Errors</a></h1>
+<p>Returns an error if reading or writing to the inner stream fails at any
+point. Also returns an error if the XMODEM protocol indicates an error.
+In particular, an <code>InvalidData</code> error is returned when:</p>
+
+<ul>
+<li>The receiver&#39;s first byte isn&#39;t a <code>NAK</code>.</li>
+<li>The receiver doesn&#39;t respond with a <code>NAK</code> to the first <code>EOT</code>.</li>
+<li>The receiver doesn&#39;t respond with an <code>ACK</code> to the second <code>EOT</code>.</li>
+<li>The receiver responds to a complete packet with something besides
+<code>ACK</code> or <code>NAK</code>.</li>
+</ul>
+
+<p>An error of kind <code>UnexpectedEof</code> is returned if <code>buf.len() &lt; 128 &amp;&amp; buf.len() != 0</code>.</p>
+
+<p>An error of kind <code>ConnectionAborted</code> is returned if a <code>CAN</code> byte is
+received when not expected.</p>
+
+<p>An error of kind <code>Interrupted</code> is returned if a packet checksum fails.</p>
+</div><h4 id='method.flush' class="method"><span id='flush.v' class='invisible'><code>pub fn <a href='#method.flush' class='fnname'>flush</a>(&amp;mut self) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/std/io/error/type.Result.html" title="type std::io::error::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/xmodem/lib.rs.html#262-264' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Flush this output stream, ensuring that all intermediately buffered
+contents reach their destination.</p>
+
+<h1 id='errors-2' class='section-header'><a href='#errors-2'>Errors</a></h1>
+<p>It is considered an error if not all bytes could be written due to I/O
+errors or EOF being reached.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "xmodem";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
