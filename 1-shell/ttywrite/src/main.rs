@@ -1,8 +1,10 @@
+#![feature(duration_extras)]
 extern crate serial;
 extern crate structopt;
 extern crate xmodem;
 #[macro_use] extern crate structopt_derive;
 
+use std::time::Instant;
 use std::path::PathBuf;
 use std::time::Duration;
 
@@ -49,10 +51,69 @@ struct Opt {
 
 fn main() {
     use std::fs::File;
-    use std::io::{self, BufReader, BufRead};
+    use std::io::{self, BufReader};
 
     let opt = Opt::from_args();
     let mut serial = serial::open(&opt.tty_path).expect("path points to invalid TTY");
 
-    // FIXME: Implement the `ttywrite` utility.
+    // set the serial settings
+    let mut serial_settings = serial.read_settings().unwrap();
+    // println!("current serial_settings: {:?}", serial_settings);
+    serial_settings.set_baud_rate(opt.baud_rate).expect("set baud_rate ok");
+    serial_settings.set_char_size(opt.char_width);
+    serial_settings.set_flow_control(opt.flow_control);
+    serial_settings.set_stop_bits(opt.stop_bits);
+    serial.set_timeout(Duration::from_secs(opt.timeout)).expect("set timeout ok");
+    serial.write_settings(&serial_settings).expect("write settings ok");
+    println!("raw: {}", &opt.raw);
+    // serial_settings = serial.read_settings().unwrap();
+    // println!("current serial_settings: {:?}", serial_settings);
+
+    // transmit stdin in the raw or via the XMODEM protocol
+    if opt.raw == true {
+        if opt.input == None {
+            let mut input_stdin = io::stdin();
+            io::copy(&mut input_stdin, &mut serial).expect("copy ok");
+        } else {
+            let mut input_file = BufReader::new(File::open(&opt.input.unwrap()).expect("open input_file ok"));
+            io::copy(&mut input_file, &mut serial).expect("copy ok");
+        }
+    } else {
+        if opt.input == None {
+            let input_stdin = io::stdin();
+            let tx_thread = std::thread::spawn(
+                move || Xmodem::transmit_with_progress(input_stdin, &mut serial, progress_fn));
+            println!("wrote {} bytes to input", 
+                     tx_thread.join().expect("tx join ok").expect("tx ok"));
+        } else {
+            let input_file = BufReader::new(File::open(&opt.input.unwrap()).expect("open input_file ok"));
+            let tx_thread = std::thread::spawn(
+                move || Xmodem::transmit_with_progress(input_file, &mut serial, progress_fn));
+            println!("wrote {} bytes to input", 
+                     tx_thread.join().expect("tx join ok").expect("tx ok"));
+        }
+    }
+}
+
+fn progress_fn(progress: Progress) {
+    println!("Progress: {:?}", progress);
+    static mut LAST_TIME: Option<Instant> = None;
+    static mut BYTES_SENT: u64 = 0;
+    unsafe {
+        BYTES_SENT += 128;
+        LAST_TIME = match LAST_TIME {
+            Some(last_time) => {
+                let now = Instant::now();
+                let duration = now - last_time;
+                let nanos = duration.as_secs() * 1_000_000_000 + duration.subsec_nanos() as u64;
+                println!(
+                    "Progress: {} bytes sent at {:.2} Kib/s",
+                    BYTES_SENT,
+                    128.0 * 1_000_000_000.0 / 1024.0 / nanos as f64
+                    );
+                Some(now)
+            }
+            None => Some(Instant::now()),
+        }
+    }
 }

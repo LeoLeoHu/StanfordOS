@@ -1,0 +1,16 @@
+/home/leohu/Documents/StanfordOS/1-shell/ttywrite/target/debug/deps/libsyn-c782e6bfff8f0483.rlib: /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/lib.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/attr.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/constant.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/data.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/escape.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/generics.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/ident.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/lit.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/mac.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/derive.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/op.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/ty.rs
+
+/home/leohu/Documents/StanfordOS/1-shell/ttywrite/target/debug/deps/syn-c782e6bfff8f0483.d: /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/lib.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/attr.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/constant.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/data.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/escape.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/generics.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/ident.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/lit.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/mac.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/derive.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/op.rs /home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/ty.rs
+
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/lib.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/attr.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/constant.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/data.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/escape.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/generics.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/ident.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/lit.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/mac.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/derive.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/op.rs:
+/home/leohu/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.11.11/src/ty.rs:

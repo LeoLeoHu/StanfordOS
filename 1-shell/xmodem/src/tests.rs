@@ -151,6 +151,7 @@ fn test_transmit_reported_bytes() {
     let rx_thread = std::thread::spawn(move || Xmodem::receive(tx, &mut output[..]));
     assert_eq!(tx_thread.join().expect("tx join okay").expect("tx okay"), 50);
     assert_eq!(rx_thread.join().expect("rx join okay").expect("rx okay"), 128);
+    // assert_eq!(&input[..], &output[..50]);
 }
 
 #[test]
