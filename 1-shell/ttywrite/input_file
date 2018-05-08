@@ -1,7 +1,0 @@
-Compiling project with 'cargo build'...
-Opening PTYs...
-Running test 1/10.
-raw: false
-Progress: Waiting
-Progress: Waiting
-Progress: 256 bytes sent at 26068.82 Kib/s
