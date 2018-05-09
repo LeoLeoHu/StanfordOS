@@ -1,0 +1,2 @@
+CLO and CHI use ReadVolatile field, which allows read only.
+And only readable method is allied for ReadVolatile.
