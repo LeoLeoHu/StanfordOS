@@ -24,6 +24,17 @@ enum LsrStatus {
 #[allow(non_snake_case)]
 struct Registers {
     // FIXME: Declare the "MU" registers from page 8.
+    IO:  Volatile<u32>,
+    IER: Volatile<u32>,
+    IIR: Volatile<u32>,
+    LCR: Volatile<u32>,
+    MCR: Volatile<u32>,
+    LSR: Volatile<u32>,
+    MSR: ReadVolatile<u32>,
+    SCRATCH: Volatile<u32>,
+    CNTL: Volatile<u32>,
+    STAT: ReadVolatile<u32>,
+    BAUD: Volatile<u32>,
 }
 
 /// The Raspberry Pi's "mini UART".
