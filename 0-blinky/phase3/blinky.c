@@ -6,6 +6,9 @@ volatile unsigned *GPIO_CLR0  = (volatile unsigned *)(GPIO_BASE + 0x28);
 volatile unsigned GPIO16OUT = 0x00040000;
 volatile unsigned GPIO16SET = 0x00010000;
 volatile unsigned GPIO16CLR = 0x00010000;
+volatile unsigned GPIO05OUT = 0x00008000;
+volatile unsigned GPIO05SET = 0x00000020;
+volatile unsigned GPIO05CLR = 0x00000020;
 
 static void spin_sleep_us(unsigned int us) {
 	for (unsigned int i = 0; i < us * 6; i++) {

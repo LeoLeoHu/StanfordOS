@@ -104,7 +104,7 @@ impl Gpio<Uninitialized> {
     pub fn into_alt(self, function: Function) -> Gpio<Alt> {
         for i in 0..6 {
             if self.pin < (i + 1) * 10 {
-                self.registers.FSEL[i as usize].write((function as u32) << (3 * (self.pin - i * 10)));
+                self.registers.FSEL[i as usize].or_mask((function as u32) << (3 * (self.pin - i * 10)));
                 break;
             }
         }
@@ -150,14 +150,6 @@ impl Gpio<Input> {
     /// Reads the pin's value. Returns `true` if the level is high and `false`
     /// if the level is low.
     pub fn level(&mut self) -> bool {
-        for i in 0..2 {
-            if self.pin < (i + 1) * 32 {
-                let mut this_clr = self.registers.LEV[i as usize].read();
-                if (this_clr >> (self.pin - i * 32)) & (0b1 as u32) == 0b1 {
-                    return true;
-                }
-            }
-        }
-        return false;
+        self.registers.LEV[(self.pin / 32) as usize].has_mask(1 << (self.pin % 32))
     }
 }
