@@ -32,10 +32,7 @@ impl Timer {
     pub fn read(&self) -> u64 {
         let clo_read = self.registers.CLO.read();
         let chi_read = self.registers.CHI.read();
-        let mut counter_value: u64 = chi_read as u64;
-        counter_value <<= 32;
-        counter_value |= clo_read as u64;
-        return counter_value;
+        ((chi_read as u64) << 32) | (clo_read as u64)
     }
 }
 
@@ -57,10 +54,5 @@ pub fn spin_sleep_us(us: u64) {
 
 /// Spins until `ms` milliseconds have passed.
 pub fn spin_sleep_ms(ms: u64) {
-    let this_time = current_time();
-    loop {
-        if current_time() >= this_time + ms * 1000{
-            break;
-        }
-    }
+    spin_sleep_us(ms * 1000);
 }
