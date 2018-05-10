@@ -45,10 +45,10 @@ struct Registers {
 }
 
 // const DATA_SIZE_7: usize = 0x00;
-const DATA_SIZE_8: usize = 0x03;
-const BAUD_RATE_115200: usize = 0x1b00;
-const ENABLE_TX_RX: usize = 0x03;
-const DLAB_CLEAR: usize = 0x80;
+const DATA_SIZE_8: usize = 0b11;
+const BAUD_RATE_115200: usize = 270;
+const ENABLE_TX_RX: usize = 0b11;
+// const DLAB_CLEAR: usize = 0x80;
 
 /// The Raspberry Pi's "mini UART".
 pub struct MiniUart {
@@ -70,6 +70,7 @@ impl MiniUart {
             (*AUX_ENABLES).or_mask(1);
             &mut *(MU_REG_BASE as *mut Registers)
         };
+
         // set GPIO14 and GPIO15 to Alt5
         Gpio::new(14).into_alt(Function::Alt5);
         Gpio::new(15).into_alt(Function::Alt5);
@@ -77,8 +78,8 @@ impl MiniUart {
         registers.LCR.or_mask(DATA_SIZE_8 as u8);
         // set baud_rate to 115200
         registers.BAUD.or_mask(BAUD_RATE_115200 as u16);
-        // clear DLAB access
-        registers.LCR.and_mask(!DLAB_CLEAR as u8);
+        //// clear DLAB access
+        //registers.LCR.and_mask(!DLAB_CLEAR as u8);
         // enable the Uart transmitter and receiver
         registers.CNTL.or_mask(ENABLE_TX_RX as u8);
 
@@ -140,7 +141,7 @@ impl MiniUart {
 
     /// Reads a byte. Blocks indefinitely until a byte is ready to be read.
     pub fn read_byte(&mut self) -> u8 {
-        while self.wait_for_byte() != Ok(()) {
+        while !self.has_byte() {
         }
         self.registers.IO.read()
     }
