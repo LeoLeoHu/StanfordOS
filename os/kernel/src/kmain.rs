@@ -21,29 +21,27 @@ pub mod console;
 pub mod shell;
 
 use pi::timer::spin_sleep_ms;
-use pi::timer::spin_sleep_us;
-
-const GPIO_BASE: usize = 0x3F000000 + 0x200000;
-const GPIO_FSEL1: *mut u32 = (GPIO_BASE + 0x04) as *mut u32;
-const GPIO_SET0: *mut u32 = (GPIO_BASE + 0x1C) as *mut u32;
-const GPIO_CLR0: *mut u32 = (GPIO_BASE + 0x28) as *mut u32;
-const GPIO16OUT: u32 = 0x00040000;
-const GPIO16SET: u32 = 0x00010000;
-const GPIO16CLR: u32 = 0x00010000;
+// use pi::timer::spin_sleep_us;
+use pi::gpio::Gpio;
 
 #[no_mangle]
 pub extern "C" fn kmain() {
-    unsafe {
-        // FIXME: Start the shell.
-        // STEP 1: Set GPIO Pin 16 as output.
-        GPIO_FSEL1.write_volatile(GPIO_FSEL1.read_volatile() | GPIO16OUT);
+    let mut gpio_05 = Gpio::new(05).into_output();
+    let mut gpio_06 = Gpio::new(06).into_output();
+    let mut gpio_13 = Gpio::new(13).into_output();
+    loop {
+        gpio_05.set();
+        spin_sleep_ms(300);
+        // gpio_06.set();
+        // spin_sleep_ms(300);
+        // gpio_13.set();
+        // spin_sleep_ms(300);
 
-        // STEP 2: Continuously set and clear GPIO 16.
-        loop {
-            GPIO_SET0.write_volatile(GPIO_SET0.read_volatile() | GPIO16SET);
-            spin_sleep_ms(1000);
-            GPIO_CLR0.write_volatile(GPIO_CLR0.read_volatile() | GPIO16CLR);
-            spin_sleep_ms(1000);
-        }
+        gpio_05.clear();
+        spin_sleep_ms(300);
+        // gpio_06.clear();
+        // spin_sleep_ms(300);
+        // gpio_13.clear();
+        // spin_sleep_ms(300);
     }
 }
