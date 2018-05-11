@@ -34,9 +34,9 @@ pub extern "C" fn kmain() {
     loop {
         let this_byte = echo_miniuart.read_byte();
         echo_miniuart.write_byte(this_byte);
-        echo_miniuart.write_str("<-");
+        echo_miniuart.write_str("->");
         gpio_05.set();
-        spin_sleep_ms(300);
+        spin_sleep_ms(100);
         gpio_05.clear();
     }
 }
