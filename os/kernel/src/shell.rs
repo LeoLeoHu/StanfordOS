@@ -1,10 +1,6 @@
-// use stack_vec::StackVec;
+use stack_vec::StackVec;
 use console::{kprint, kprintln, CONSOLE};
-use std::path
 use pi::timer::spin_sleep_ms;
-use std::str;
-#[cfg(not(test))]
-use std::io::Read;
 
 const BEL: u8 = 0x07;
 const BS:  u8 = 0x08;
@@ -17,13 +13,12 @@ const DEL: u8 = 0x7f;
 #[derive(Debug)]
 enum Error {
     Empty,
-    // TooManyArgs,
+    TooManyArgs,
 }
 
 /// A structure representing a single shell command.
 struct Command<'a> {
-    // args: StackVec<'a, &'a str>
-    args: Vec<&'a str>,
+    args: StackVec<'a, &'a str>,
 }
 
 impl<'a> Command<'a> {
@@ -34,12 +29,10 @@ impl<'a> Command<'a> {
     ///
     /// If `s` contains no arguments, returns `Error::Empty`. If there are more
     /// arguments than `buf` can hold, returns `Error::TooManyArgs`.
-    // fn parse(s: &'a str, buf: &'a mut [&'a str]) -> Result<Command<'a>, Error> {
-    //     let mut args = StackVec::new(buf);
-    fn parse(s: &str) -> Result<Command, Error> {
-        let mut args = Vec::with_capacity(64);
+    fn parse(s: &'a str, buf: &'a mut [&'a str]) -> Result<Command<'a>, Error> {
+        let mut args = StackVec::new(buf);
         for arg in s.split(' ').filter(|a| !a.is_empty()) {
-            args.push(arg);
+            args.push(arg).map_err(|_| Error::TooManyArgs)?;
         }
         if args.is_empty() {
             return Err(Error::Empty);
@@ -57,11 +50,15 @@ impl<'a> Command<'a> {
 /// never returns: it is perpetually in a shell loop.
 pub fn shell(prefix: &str) -> ! {
     spin_sleep_ms(200);
-    let mut raw_command = Vec::new();
+    let mut command_storage = [0u8; 512];
+    let mut raw_command = StackVec::new(&mut command_storage);
+    let mut cwd = PathBuf::from("/");
 
     loop {
+        kprint!("{}{}", cwd.display(), prefix);
+
         let this_command = read_command(&mut raw_command);
-        match Command::parse(&this_command) {
+        match Command::parse(&this_command, &command_storage) {
             Ok(command) => {
                 let command_path = command.path();
                 match command_path {
@@ -75,26 +72,28 @@ pub fn shell(prefix: &str) -> ! {
     }
 }
 
-fn read_command(raw_command: &mut Vec<Vec<u8>>) -> String {
+fn read_command(raw_command: &mut StackVec<StackVec<u8>>) -> [u8] {
     let mut console = CONSOLE.lock();
     let mut cursor = 0;
-    let mut line_vec = Vec::with_capacity(512);
-    let mut history_index = raw_command.len();
+    let mut command_storage = [0u8; 512];
+    let mut raw_command_line = StackVec::new(&mut command_storage);
+    let mut raw_command_index = raw_command.len();
+
     loop {
         match console.read_byte() {
             BS | DEL => {
                 // backspace
                 if cursor > 0 {
                     cursor -= 1;
-                    line_vec.remove(cursor);
+                    raw_command_line.remove(cursor);
                     console.write_byte(BS);
-                    // for bytes in &line_vec[cursor..] {
-                    //     console.write_byte(*bytes);
-                    // }
+                    for bytes in &raw_command_line[cursor..] {
+                        console.write_byte(*bytes);
+                    }
                     console.write_byte(b' ');
-                    // for _ in cursor..line_vec.len() {
-                    // console.write_byte(BS);
-                    // }
+                    for _i in cursor..raw_command_line.len() {
+                        console.write_byte(BS);
+                    }
                     console.write_byte(BS);
                 } else {
                     console.write_byte(BEL);
@@ -104,24 +103,15 @@ fn read_command(raw_command: &mut Vec<Vec<u8>>) -> String {
                 // return
                 console.write_byte(CR);
                 console.write_byte(LF);
-                break;
+                break; // end of loop
             }
-            ESC => {
-                match console.read_byte() {
-                    b'[' => {
-                    }
-                    _ => {
-                        console.write_byte(BEL);
-                    }
-                }
-            }
-            byte if byte.is_ascii_graphic() || byte == b' ' => {
-                line_vec.insert(cursor, byte);
-                for byte in &line_vec[cursor..] {
-                    console.write_byte(*byte);
+            bytes if bytes.is_ascii_graphic() || bytes == b' ' => {
+                raw_command_line.insert(cursor, bytes);
+                for bytes in &raw_command_line[cursor..] {
+                    console.write_byte(*bytes);
                 }
                 cursor += 1;
-                for _i in cursor..line_vec.len() {
+                for _i in cursor..raw_command_line.len() {
                     console.write_byte(BS);
                 }
             }
@@ -130,9 +120,8 @@ fn read_command(raw_command: &mut Vec<Vec<u8>>) -> String {
                 console.write_byte(BEL);
             }
         }
-    }
-    raw_command.push(line_vec.clone());
-    String::from_utf8(line_vec).unwrap_or_default()
+    raw_command.push(raw_command_line.clone());
+    raw_command_line.as_slice()
 }
     fn mini_echo(command: &Command) {
         if command.args.len() > 1 {
