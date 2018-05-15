@@ -1,9 +1,6 @@
 use stack_vec::StackVec;
 use console::{kprint, kprintln, CONSOLE};
-use pi::timer::{current_time, spin_sleep_ms};
-use pi::gpio::Gpio;
-#[cfg(not(test))]
-use std::io::Read;
+use pi::timer::spin_sleep_ms;
 use std::str;
 
 const BEL: u8 = 0x07;
@@ -17,15 +14,14 @@ const BANNER: &str = r#"
              __-         `-_    
          ___/__        〇   \ 
      - '     _/             /
-   '_'             /
- / _- ---            __ -
-/`     |          _ / \  \
+   /_'             /	   /
+ / _- ---            __ - /
+/`     |          _ / \  |
        |       -       \ |
-        \    /          V
-          \  |
+        \     /         V
+          \   |
             \ \
               \"#;
-
 
 /// Error type for `Command` parse failures.
 #[derive(Debug)]
@@ -48,7 +44,7 @@ impl<'a> Command<'a> {
     /// If `s` contains no arguments, returns `Error::Empty`. If there are more
     /// arguments than `buf` can hold, returns `Error::TooManyArgs`.
     fn parse(s: &'a str, buf: &'a mut [&'a str]) -> Result<Command<'a>, Error> {
-         let mut args = StackVec::new(buf);
+        let mut args = StackVec::new(buf);
         for arg in s.split(' ').filter(|a| !a.is_empty()) {
             args.push(arg).map_err(|_| Error::TooManyArgs)?;
         }
@@ -70,7 +66,8 @@ pub fn shell(prefix: &str) -> ! {
     spin_sleep_ms(200); // wait a little time for client to attach
     kprintln!("{}", BANNER);
 
-    let mut history = Vec::new();
+    let mut history_storage = [0u8; 512];
+    let mut history = StackVec::new(&mut history_storage);
     loop {
         kprint!("{}", prefix);
 
@@ -90,10 +87,12 @@ pub fn shell(prefix: &str) -> ! {
     }
 }
 
-fn read_line(history: &mut Vec<Vec<u8>>) -> String {
+fn read_line<'a>(history: &'a mut StackVec<StackVec<'a, u8>>) -> &'a str {
     let mut console = CONSOLE.lock();
     let mut cursor = 0;
-    let mut line_vec = Vec::with_capacity(512);
+
+    let mut line_vec_storage = [0u8; 512];
+    let mut line_vec = StackVec::new(&mut line_vec_storage);
     let mut history_index = history.len();
     loop {
         match console.read_byte() {

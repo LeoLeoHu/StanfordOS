@@ -4,7 +4,7 @@
 #![feature(asm)]
 #![feature(optin_builtin_traits)]
 #![feature(decl_macro)]
-// #![feature(repr_align)]
+#![feature(repr_align)]
 #![feature(attr_literals)]
 #![feature(never_type)]
 #![feature(ptr_internals)]
