@@ -120,17 +120,18 @@ fn read_command(raw_command: &mut StackVec<StackVec<u8>>) -> [u8] {
                 console.write_byte(BEL);
             }
         }
-    raw_command.push(raw_command_line.clone());
-    raw_command_line.as_slice()
+        raw_command.push(raw_command_line.clone());
+        raw_command_line.as_slice()
+    }
 }
-    fn mini_echo(command: &Command) {
-        if command.args.len() > 1 {
-            kprint!("{}", command.args[1]);
-            if command.args.len() > 2 {
-                for command_para in &command.args[2..] {
-                    kprint!(" {}", *command_para);
-                }
+fn mini_echo(command: &Command) {
+    if command.args.len() > 1 {
+        kprint!("{}", command.args[1]);
+        if command.args.len() > 2 {
+            for command_para in &command.args[2..] {
+                kprint!(" {}", *command_para);
             }
         }
-        kprintln!();
     }
+    kprintln!();
+}
