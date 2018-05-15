@@ -1,6 +1,5 @@
-// use stack_vec::StackVec;
+use stack_vec::StackVec;
 use console::{kprint, kprintln, CONSOLE};
-use std::path::{Path, PathBuf};
 use pi::timer::{current_time, spin_sleep_ms};
 use pi::gpio::Gpio;
 #[cfg(not(test))]
@@ -32,13 +31,12 @@ const BANNER: &str = r#"
 #[derive(Debug)]
 enum Error {
     Empty,
-    // TooManyArgs,
+    TooManyArgs,
 }
 
 /// A structure representing a single shell command.
 struct Command<'a> {
-    // args: StackVec<'a, &'a str>,
-    args: Vec<&'a str>,
+    args: StackVec<'a, &'a str>,
 }
 
 impl<'a> Command<'a> {
@@ -49,13 +47,10 @@ impl<'a> Command<'a> {
     ///
     /// If `s` contains no arguments, returns `Error::Empty`. If there are more
     /// arguments than `buf` can hold, returns `Error::TooManyArgs`.
-    // fn parse(s: &'a str, buf: &'a mut [&'a str]) -> Result<Command<'a>, Error> {
-    //     let mut args = StackVec::new(buf);
-    fn parse(s: &str) -> Result<Command, Error> {
-        let mut args = Vec::with_capacity(64);
+    fn parse(s: &'a str, buf: &'a mut [&'a str]) -> Result<Command<'a>, Error> {
+         let mut args = StackVec::new(buf);
         for arg in s.split(' ').filter(|a| !a.is_empty()) {
-            // args.push(arg).map_err(|_| Error::TooManyArgs)?;
-            args.push(arg);
+            args.push(arg).map_err(|_| Error::TooManyArgs)?;
         }
         if args.is_empty() {
             return Err(Error::Empty);
@@ -76,9 +71,8 @@ pub fn shell(prefix: &str) -> ! {
     kprintln!("{}", BANNER);
 
     let mut history = Vec::new();
-    let mut cwd = PathBuf::from("/");
     loop {
-        kprint!("{}{}", cwd.display(), prefix);
+        kprint!("{}", prefix);
 
         let line = read_line(&mut history);
         match Command::parse(&line) {
@@ -128,71 +122,6 @@ fn read_line(history: &mut Vec<Vec<u8>>) -> String {
                 console.write_byte(LF);
                 break;
             }
-            ESC => {
-                match console.read_byte() {
-                    b'[' => {
-                        match console.read_byte() {
-                            b'D' => {
-                                // Left arrow
-                                if cursor > 0 {
-                                    cursor -= 1;
-                                    console.write_byte(ESC);
-                                    console.write_byte(b'[');
-                                    console.write_byte(b'D');
-                                } else {
-                                    console.write_byte(BEL);
-                                }
-                            }
-                            b'C' => {
-                                // Right arrow
-                                if cursor < line_vec.len() {
-                                    cursor += 1;
-                                    console.write_byte(ESC);
-                                    console.write_byte(b'[');
-                                    console.write_byte(b'C');
-                                } else {
-                                    console.write_byte(BEL);
-                                }
-                            }
-                            direction @ b'A' | direction @ b'B' => {
-                                if direction == b'A' && history_index > 0 {
-                                    // Up arrow
-                                    history_index -= 1;
-                                } else if direction == b'B' && history.len() > 0 // usize underflow
-                                    && history_index < history.len() - 1
-                                    {
-                                        // Down arrow
-                                        history_index += 1;
-                                    } else {
-                                        console.write_byte(BEL);
-                                        continue;
-                                    }
-
-                                for _ in 0..line_vec.len() {
-                                    console.write_byte(BS);
-                                }
-                                for _ in 0..line_vec.len() {
-                                    console.write_byte(b' ');
-                                }
-                                for _ in 0..line_vec.len() {
-                                    console.write_byte(BS);
-                                }
-                                line_vec = history[history_index].clone();
-                                cursor = line_vec.len();
-                                for byte in &line_vec {
-                                    console.write_byte(*byte);
-                                }
-                            }
-                            _ => {
-                                console.write_byte(BEL);
-                            }
-                        }
-                    }
-                    _ => {
-                        console.write_byte(BEL);
-                    }
-                }
-            }
             byte if byte.is_ascii_graphic() || byte == b' ' => {
                 line_vec.insert(cursor, byte);
                 for byte in &line_vec[cursor..] {
@@ -213,15 +142,16 @@ fn read_line(history: &mut Vec<Vec<u8>>) -> String {
     history.push(line_vec.clone());
     String::from_utf8(line_vec).unwrap_or_default()
 }
-    fn echo(command: &Command) {
-        if command.args.len() > 1 {
-            kprint!("{}", command.args[1]);
-            if command.args.len() > 2 {
-                for arg in &command.args[2..] {
-                    kprint!(" {}", *arg);
-                }
+
+fn echo(command: &Command) {
+    if command.args.len() > 1 {
+        kprint!("{}", command.args[1]);
+        if command.args.len() > 2 {
+            for arg in &command.args[2..] {
+                kprint!(" {}", *arg);
             }
         }
-
-        kprintln!();
     }
+
+    kprintln!();
+}

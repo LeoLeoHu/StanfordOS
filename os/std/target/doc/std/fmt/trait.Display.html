@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Display` trait in crate `std`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Display">
+
+    <title>std::fmt::Display - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc trait">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
+        
+        <p class='location'>Trait Display</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#required-methods">Required Methods</a><div class="sidebar-links"><a href="#tymethod.fmt">fmt</a></div><a class="sidebar-title" href="#foreign-impls">Implementations on Foreign Types</a><div class="sidebar-links"><a href="#impl-Display">TryFromSliceError</a><a href="#impl-Display">Wrapping&lt;T&gt;</a><a href="#impl-Display">TryFromIntError</a><a href="#impl-Display">ParseFloatError</a><a href="#impl-Display">ParseIntError</a><a href="#impl-Display">Utf8Lossy</a></div><a class="sidebar-title" href="#implementors">Implementors</a></div><p class='location'><a href='../index.html'>std</a>::<wbr><a href='index.html'>fmt</a></p><script>window.sidebarCurrent = {name: 'Display', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>std</a>::<wbr><a href='index.html'>fmt</a>::<wbr><a class="trait" href=''>Display</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.0.0'>1.0.0</span><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#597-621' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait Display {
+    fn <a href='#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;;
+}</pre><div class='docblock'><p>Format trait for an empty format, <code>{}</code>.</p>
+
+<p><code>Display</code> is similar to <a href="trait.Debug.html"><code>Debug</code></a>, but <code>Display</code> is for user-facing
+output, and so cannot be derived.</p>
+
+<p>For more information on formatters, see <a href="../../std/fmt/index.html">the module-level documentation</a>.</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<p>Implementing <code>Display</code> on a type:</p>
+
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
+
+<span class="kw">struct</span> <span class="ident">Point</span> {
+    <span class="ident">x</span>: <span class="ident">i32</span>,
+    <span class="ident">y</span>: <span class="ident">i32</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Point</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;({}, {})&quot;</span>, <span class="self">self</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span>)
+    }
+}
+
+<span class="kw">let</span> <span class="ident">origin</span> <span class="op">=</span> <span class="ident">Point</span> { <span class="ident">x</span>: <span class="number">0</span>, <span class="ident">y</span>: <span class="number">0</span> };
+
+<span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;The origin is: {}&quot;</span>, <span class="ident">origin</span>);</pre>
+</div>
+            <h2 id='required-methods' class='small-section-header'>
+              Required Methods<a href='#required-methods' class='anchor'></a>
+            </h2>
+            <div class='methods'>
+        <h3 id='tymethod.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span></h3><div class='docblock'><p>Formats the value using the given formatter.</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
+
+<span class="kw">struct</span> <span class="ident">Position</span> {
+    <span class="ident">longitude</span>: <span class="ident">f32</span>,
+    <span class="ident">latitude</span>: <span class="ident">f32</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Position</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;({}, {})&quot;</span>, <span class="self">self</span>.<span class="ident">longitude</span>, <span class="self">self</span>.<span class="ident">latitude</span>)
+    }
+}
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="string">&quot;(1.987, 2.983)&quot;</span>.<span class="ident">to_owned</span>(),
+           <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">Position</span> { <span class="ident">longitude</span>: <span class="number">1.987</span>, <span class="ident">latitude</span>: <span class="number">2.983</span>, }));</pre>
+</div></div>
+                <h2 id='foreign-impls' class='small-section-header'>
+                  Implementations on Foreign Types<a href='#foreign-impls' class='anchor'></a>
+                </h2>
+            <h3 id='impl-Display' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> for <a class="struct" href="https://doc.rust-lang.org/nightly/core/array/struct.TryFromSliceError.html" title="struct core::array::TryFromSliceError">TryFromSliceError</a></code><a href='#impl-Display' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/array.rs.html#66-71' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v-1' class='invisible'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/array.rs.html#68-70' title='goto source code'>[src]</a></span></h4>
+</div></span><h3 id='impl-Display-1' class='impl'><span class='in-band'><code>impl&lt;T&gt; <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> for <a class="struct" href="https://doc.rust-lang.org/nightly/core/num/struct.Wrapping.html" title="struct core::num::Wrapping">Wrapping</a>&lt;T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a>,&nbsp;</span></code><a href='#impl-Display-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/mod.rs.html#57-61' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.fmt-1' class="method"><span id='fmt.v-2' class='invisible'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/mod.rs.html#58-60' title='goto source code'>[src]</a></span></h4>
+</div></span><h3 id='impl-Display-2' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> for <a class="struct" href="https://doc.rust-lang.org/nightly/core/num/struct.TryFromIntError.html" title="struct core::num::TryFromIntError">TryFromIntError</a></code><a href='#impl-Display-2' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/mod.rs.html#2976-2980' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.fmt-2' class="method"><span id='fmt.v-3' class='invisible'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/mod.rs.html#2977-2979' title='goto source code'>[src]</a></span></h4>
+</div></span><h3 id='impl-Display-3' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> for <a class="struct" href="https://doc.rust-lang.org/nightly/core/num/dec2flt/struct.ParseFloatError.html" title="struct core::num::dec2flt::ParseFloatError">ParseFloatError</a></code><a href='#impl-Display-3' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/dec2flt/mod.rs.html#184-188' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.fmt-3' class="method"><span id='fmt.v-4' class='invisible'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/dec2flt/mod.rs.html#185-187' title='goto source code'>[src]</a></span></h4>
+</div></span><h3 id='impl-Display-4' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> for <a class="struct" href="https://doc.rust-lang.org/nightly/core/num/struct.ParseIntError.html" title="struct core::num::ParseIntError">ParseIntError</a></code><a href='#impl-Display-4' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/mod.rs.html#3319-3323' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.fmt-4' class="method"><span id='fmt.v-5' class='invisible'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/num/mod.rs.html#3320-3322' title='goto source code'>[src]</a></span></h4>
+</div></span><h3 id='impl-Display-5' class='impl'><span class='in-band'><code>impl <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> for <a class="struct" href="https://doc.rust-lang.org/nightly/std_unicode/lossy/struct.Utf8Lossy.html" title="struct std_unicode::lossy::Utf8Lossy">Utf8Lossy</a></code><a href='#impl-Display-5' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/std_unicode/lossy.rs.html#155-179' title='goto source code'>[src]</a></span></h3>
+<span class='docblock autohide'><div class='impl-items'><h4 id='method.fmt-5' class="method"><span id='fmt.v-6' class='invisible'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="../../std/fmt/struct.Formatter.html" title="struct std::fmt::Formatter">Formatter</a>) -&gt; <a class="enum" href="../../std/result/enum.Result.html" title="enum std::result::Result">Result</a>&lt;(), <a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a>&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/std_unicode/lossy.rs.html#156-178' title='goto source code'>[src]</a></span></h4>
+</div></span>
+        <h2 id='implementors' class='small-section-header'>
+          Implementors<a href='#implementors' class='anchor'></a>
+        </h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for u16</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for i128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/str/mod.rs.html#148-152' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/str/struct.ParseBoolError.html" title="struct std::str::ParseBoolError">ParseBoolError</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/float.rs.html#134-138' title='goto source code'>[src]</a></div><code>impl Display for f32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cell.rs.html#503-507' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/cell/struct.BorrowError.html" title="struct std::cell::BorrowError">BorrowError</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for usize</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for i64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1545-1549' title='goto source code'>[src]</a></div><code>impl Display for std::fmt::<a class="struct" href="../../std/fmt/struct.Error.html" title="struct std::fmt::Error">Error</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/convert.rs.html#64-69' title='goto source code'>[src]</a></div><code>impl Display for <a class="enum" href="../../std/convert/enum.Infallible.html" title="enum std::convert::Infallible">Infallible</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cell.rs.html#523-527' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/cell/struct.BorrowMutError.html" title="struct std::cell::BorrowMutError">BorrowMutError</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1578-1582' title='goto source code'>[src]</a></div><code>impl Display for !</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/float.rs.html#134-138' title='goto source code'>[src]</a></div><code>impl Display for f64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1557-1559' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Display for &amp;'a T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for isize</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cell.rs.html#1050-1054' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Display for <a class="struct" href="../../std/cell/struct.Ref.html" title="struct std::cell::Ref">Ref</a>&lt;'a, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1620-1624' title='goto source code'>[src]</a></div><code>impl Display for str</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/char.rs.html#797-801' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.EscapeDebug.html" title="struct std::char::EscapeDebug">EscapeDebug</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for u8</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for u64</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1561-1563' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Display for &amp;'a mut T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for u32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/char.rs.html#650-657' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.EscapeUnicode.html" title="struct std::char::EscapeUnicode">EscapeUnicode</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#431-435' title='goto source code'>[src]</a></div><code>impl&lt;'a&gt; Display for <a class="struct" href="../../std/fmt/struct.Arguments.html" title="struct std::fmt::Arguments">Arguments</a>&lt;'a&gt;</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for u128</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for i32</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/char.rs.html#763-770' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.EscapeDefault.html" title="struct std::char::EscapeDefault">EscapeDefault</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for i8</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cell.rs.html#1151-1155' title='goto source code'>[src]</a></div><code>impl&lt;'a, T&gt; Display for <a class="struct" href="../../std/cell/struct.RefMut.html" title="struct std::cell::RefMut">RefMut</a>&lt;'a, T&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="../../std/fmt/trait.Display.html" title="trait std::fmt::Display">Display</a> + ?<a class="trait" href="../../std/marker/trait.Sized.html" title="trait std::marker::Sized">Sized</a>,&nbsp;</span></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/num.rs.html#199-258' title='goto source code'>[src]</a></div><code>impl Display for i16</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/char.rs.html#241-245' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.ParseCharError.html" title="struct std::char::ParseCharError">ParseCharError</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1592-1596' title='goto source code'>[src]</a></div><code>impl Display for bool</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/fmt/mod.rs.html#1638-1646' title='goto source code'>[src]</a></div><code>impl Display for char</code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/char.rs.html#288-292' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.CharTryFromError.html" title="struct std::char::CharTryFromError">CharTryFromError</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/str/mod.rs.html#438-447' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/str/struct.Utf8Error.html" title="struct std::str::Utf8Error">Utf8Error</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/std_unicode/char.rs.html#1579-1583' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.DecodeUtf16Error.html" title="struct std::char::DecodeUtf16Error">DecodeUtf16Error</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/std_unicode/char.rs.html#169-173' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.ToUppercase.html" title="struct std::char::ToUppercase">ToUppercase</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='https://doc.rust-lang.org/nightly/src/std_unicode/char.rs.html#162-166' title='goto source code'>[src]</a></div><code>impl Display for <a class="struct" href="../../std/char/struct.ToLowercase.html" title="struct std::char::ToLowercase">ToLowercase</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/io/error.rs.html#548-561' title='goto source code'>[src]</a></div><code>impl Display for std::io::<a class="struct" href="../../std/io/struct.Error.html" title="struct std::io::Error">Error</a></code></li>
+<li><div class='out-of-band'><a class='srclink' href='../../src/std/io/mod.rs.html#2076-2085' title='goto source code'>[src]</a></div><code>impl Display for <a class="enum" href="../../std/io/enum.CharsError.html" title="enum std::io::CharsError">CharsError</a></code></li>
+</ul><script type="text/javascript" async
+                         src="../../implementors/core/fmt/trait.Display.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "std";
+    </script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
