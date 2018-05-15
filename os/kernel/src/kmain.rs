@@ -12,7 +12,6 @@
 #![no_builtins]
 
 extern crate pi;
-extern crate stack_vec;
 extern crate compiler_builtins;
 
 pub mod lang_items;
