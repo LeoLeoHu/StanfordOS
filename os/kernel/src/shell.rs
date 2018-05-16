@@ -72,7 +72,7 @@ pub fn shell(prefix: &str) -> ! {
         kprint!("{}", prefix);
 
         let line = read_line(&mut history);
-        match Command::parse(&line, &mut str::from_utf8(history.as_slice()).expect("something wrong")) {
+        match Command::parse(line, line) {
             Ok(command) => {
                 let path = command.path();
                 match path {
@@ -80,20 +80,19 @@ pub fn shell(prefix: &str) -> ! {
                         _ => kprintln!("unknown command: {}", path),
                 }
             }
-            Err(Error::Empty) => {
+            Err(_Error) => {
                 // Ignore
             }
         }
     }
 }
 
-fn read_line<'a>(history: &'a mut StackVec<'a, u8>) -> &'a str {
+fn read_line<'a>(history: &'a mut StackVec<'a, u8>) -> &'a mut [&'a str] {
     let mut console = CONSOLE.lock();
     let mut cursor = 0;
 
     let mut line_vec_storage = [0u8; 512];
     let mut line_vec = StackVec::new(&mut line_vec_storage);
-    let mut history_index = history.len();
     loop {
         match console.read_byte() {
             BS | DEL => {
@@ -141,7 +140,7 @@ fn read_line<'a>(history: &'a mut StackVec<'a, u8>) -> &'a str {
     for i in 0..512 {
         history.push(line_vec[i]);
     }
-    str::from_utf8(&line_vec).unwrap_or_default()
+    return &mut [str::from_utf8(&line_vec).expect("something wrong")];
 }
 
 fn echo(command: &Command) {

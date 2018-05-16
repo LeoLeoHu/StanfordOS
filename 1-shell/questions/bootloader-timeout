@@ -1,0 +1,1 @@
+Try to reconnect if no NAK is received. Or the xmodem will attemp to read just for 10 times.

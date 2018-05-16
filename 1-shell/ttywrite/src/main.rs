@@ -114,6 +114,6 @@ fn progress_fn(progress: Progress) {
                 Some(now)
             }
             None => Some(Instant::now()),
-        }
+        };
     }
 }
