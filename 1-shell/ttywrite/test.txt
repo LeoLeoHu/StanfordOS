@@ -1,4 +1,9 @@
 Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
 Opening PTYs...
 Running test 1/10.
 
@@ -15,3 +20,715 @@ TTYSettings {
 termios: Termios { 
 inner: termios { 
 c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Compiling project with 'cargo build'...
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
+Running test 1/10.
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+
+current serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 2239, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 15, c_ospeed: 15 } } }
+ 
+
+
+current_serial_settings: 
+TTYSettings { 
+termios: Termios { 
+inner: termios { 
+c_iflag: 0, c_oflag: 4, c_cflag: 6322, c_lflag: 2560, c_line: 0, c_cc: [3, 28, 127, 21, 4, 0, 0, 0, 17, 19, 26, 0, 18, 15, 23, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], c_ispeed: 4098, c_ospeed: 4098 } } }
+Opening PTYs...
