@@ -63,84 +63,86 @@ impl<'a> Command<'a> {
 /// Starts a shell using `prefix` as the prefix for each line. This function
 /// never returns: it is perpetually in a shell loop.
 pub fn shell(prefix: &str) -> ! {
-    spin_sleep_ms(200); // wait a little time for client to attach
-    kprintln!("{}", BANNER);
+    unimplemented!()
+    // spin_sleep_ms(200); // wait a little time for client to attach
+    // kprintln!("{}", BANNER);
 
-    let mut history_storage = [0u8; 512];
-    let mut history = StackVec::new(&mut history_storage);
-    loop {
-        kprint!("{}", prefix);
+    // let mut history_storage = [0u8; 512];
+    // let mut history = StackVec::new(&mut history_storage);
+    // loop {
+    //     kprint!("{}", prefix);
 
-        let line = read_line(&mut history);
-        match Command::parse(line, line) {
-            Ok(command) => {
-                let path = command.path();
-                match path {
-                    "echo" => echo(&command),
-                        _ => kprintln!("unknown command: {}", path),
-                }
-            }
-            Err(_Error) => {
-                // Ignore
-            }
-        }
-    }
+    //     let line = read_line(&mut history);
+    //     match Command::parse(line, line) {
+    //         Ok(command) => {
+    //             let path = command.path();
+    //             match path {
+    //                 "echo" => echo(&command),
+    //                     _ => kprintln!("unknown command: {}", path),
+    //             }
+    //         }
+    //         Err(_Error) => {
+    //             // Ignore
+    //         }
+    //     }
+    // }
 }
 
 fn read_line<'a>(history: &'a mut StackVec<'a, u8>) -> &'a mut [&'a str] {
-    let mut console = CONSOLE.lock();
-    let mut cursor = 0;
+    unimplemented!()
+    // let mut console = CONSOLE.lock();
+    // let mut cursor = 0;
 
-    let mut line_vec_storage = [0u8; 512];
-    let mut line_vec = StackVec::new(&mut line_vec_storage);
-    loop {
-        match console.read_byte() {
-            BS | DEL => {
-                // Backspace
-                if cursor > 0 {
-                    cursor -= 1;
-                    line_vec.remove(cursor);
+    // let mut line_vec_storage = [0u8; 512];
+    // let mut line_vec = StackVec::new(&mut line_vec_storage);
+    // loop {
+    //     match console.read_byte() {
+    //         BS | DEL => {
+    //             // Backspace
+    //             if cursor > 0 {
+    //                 cursor -= 1;
+    //                 line_vec.remove(cursor);
 
-                    console.write_byte(BS);
-                    for byte in &line_vec[cursor..] {
-                        console.write_byte(*byte);
-                    }
-                    console.write_byte(b' ');
-                    for _i in cursor..line_vec.len() {
-                        console.write_byte(BS);
-                    }
-                    console.write_byte(BS);
-                } else {
-                    console.write_byte(BEL);
-                }
-            }
-            CR | LF => {
-                // Return
-                console.write_byte(CR);
-                console.write_byte(LF);
-                break;
-            }
-            byte if byte.is_ascii_graphic() || byte == b' ' => {
-                line_vec.insert(cursor, byte);
-                for byte in &line_vec[cursor..] {
-                    console.write_byte(*byte);
-                }
-                cursor += 1;
-                for _i in cursor..line_vec.len() {
-                    console.write_byte(BS);
-                }
-            }
-            _ => {
-                // unrecognized characters
-                console.write_byte(BEL);
-            }
-        }
-    }
+    //                 console.write_byte(BS);
+    //                 for byte in &line_vec[cursor..] {
+    //                     console.write_byte(*byte);
+    //                 }
+    //                 console.write_byte(b' ');
+    //                 for _i in cursor..line_vec.len() {
+    //                     console.write_byte(BS);
+    //                 }
+    //                 console.write_byte(BS);
+    //             } else {
+    //                 console.write_byte(BEL);
+    //             }
+    //         }
+    //         CR | LF => {
+    //             // Return
+    //             console.write_byte(CR);
+    //             console.write_byte(LF);
+    //             break;
+    //         }
+    //         byte if byte.is_ascii_graphic() || byte == b' ' => {
+    //             line_vec.insert(cursor, byte);
+    //             for byte in &line_vec[cursor..] {
+    //                 console.write_byte(*byte);
+    //             }
+    //             cursor += 1;
+    //             for _i in cursor..line_vec.len() {
+    //                 console.write_byte(BS);
+    //             }
+    //         }
+    //         _ => {
+    //             // unrecognized characters
+    //             console.write_byte(BEL);
+    //         }
+    //     }
+    // }
 
-    for i in 0..512 {
-        history.push(line_vec[i]);
-    }
-    return &mut [str::from_utf8(&line_vec).expect("something wrong")];
+    // for i in 0..512 {
+    //     history.push(line_vec[i]);
+    // }
+    // return &mut [str::from_utf8(&line_vec).expect("something wrong")];
 }
 
 fn echo(command: &Command) {

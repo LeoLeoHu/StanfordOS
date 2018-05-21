@@ -1,2 +1,5 @@
+cargo:rustc-link-search=native=ext
+cargo:rustc-link-lib=static=sd
+cargo:rerun-if-changed=ext/libsd.a
 cargo:rerun-if-changed=ext/layout.ld
 cargo:rerun-if-changed=ext/init.S

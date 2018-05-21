@@ -6,14 +6,11 @@
 #![feature(decl_macro)]
 #![feature(repr_align)]
 #![feature(attr_literals)]
-<<<<<<< HEAD
 #![feature(exclusive_range_pattern)]
 #![feature(alloc, allocator_api, global_allocator)]
-=======
 #![feature(never_type)]
 #![feature(ptr_internals)]
 #![feature(ptr_internals)]
->>>>>>> master
 
 #[macro_use]
 #[allow(unused_imports)]
