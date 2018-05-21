@@ -41,7 +41,7 @@ impl Console {
 impl io::Read for Console {
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
         self.inner().read(buf)
-   }
+    }
 }
 
 impl io::Write for Console {
