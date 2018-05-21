@@ -1,12 +1,15 @@
 use core::fmt;
+
 use volatile::prelude::*;
 use volatile::{Volatile, ReadVolatile, Reserved};
+
 use timer;
 use common::IO_BASE;
 use gpio::{Gpio, Function};
 
 /// The base address for the `MU` registers.
 const MU_REG_BASE: usize = IO_BASE + 0x215040;
+
 /// The `AUXENB` register from page 9 of the BCM2837 documentation.
 const AUX_ENABLES: *mut Volatile<u8> = (IO_BASE + 0x215004) as *mut Volatile<u8>;
 
@@ -178,7 +181,7 @@ mod uart_io {
     //
     // The `io::Write::write()` method must write all of the requested bytes
     // before returning.
-    impl io::Read for MiniUart {
+        impl io::Read for MiniUart {
         fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
             match self.wait_for_byte() {
                 Ok(()) => {

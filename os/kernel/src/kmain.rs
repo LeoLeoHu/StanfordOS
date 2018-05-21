@@ -8,9 +8,6 @@
 #![feature(attr_literals)]
 #![feature(exclusive_range_pattern)]
 #![feature(alloc, allocator_api, global_allocator)]
-#![feature(never_type)]
-#![feature(ptr_internals)]
-#![feature(ptr_internals)]
 
 #[macro_use]
 #[allow(unused_imports)]

@@ -1,6 +1,8 @@
 use std::io;
 use std::fmt;
+
 use pi::uart::MiniUart;
+
 use mutex::Mutex;
 
 /// A global singleton allowing read/write access to the console.
@@ -66,16 +68,22 @@ pub static CONSOLE: Mutex<Console> = Mutex::new(Console::new());
 /// Internal function called by the `kprint[ln]!` macros.
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
-    use std::fmt::Write;
-    let mut console = CONSOLE.lock();
-    console.write_fmt(args).unwrap();
+    #[cfg(not(test))]
+    {
+        use std::fmt::Write;
+        let mut console = CONSOLE.lock();
+        console.write_fmt(args).unwrap();
+    }
+
+    #[cfg(test)]
+    { print!("{}", args); }
 }
 
 /// Like `println!`, but for kernel-space.
 pub macro kprintln {
     () => (kprint!("\n")),
-        ($fmt:expr) => (kprint!(concat!($fmt, "\n"))),
-        ($fmt:expr, $($arg:tt)*) => (kprint!(concat!($fmt, "\n"), $($arg)*))
+    ($fmt:expr) => (kprint!(concat!($fmt, "\n"))),
+    ($fmt:expr, $($arg:tt)*) => (kprint!(concat!($fmt, "\n"), $($arg)*))
 }
 
 /// Like `print!`, but for kernel-space.

@@ -1,19 +1,14 @@
 #![feature(asm, lang_items)]
-#![feature(alloc, allocator_api, global_allocator)]
-#![feature(optin_builtin_traits)]
-#![feature(const_fn)]
-#![feature(decl_macro)]
-#![feature(core_intrinsics)]
- 
-extern crate pi;
+
 extern crate xmodem;
- 
+extern crate pi;
+
 use std::io;
 use std::io::Write;
 use pi::uart::MiniUart;
 
 pub mod lang_items;
- 
+
 /// Start address of the binary to load and of the bootloader.
 const BINARY_START_ADDR: usize = 0x80000;
 const BOOTLOADER_START_ADDR: usize = 0x4000000;
