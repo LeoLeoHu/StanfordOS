@@ -1,0 +1,6 @@
+Because the ReadVolatile doesn't have the Writeable Trait,
+and the WriteVolatile doesn't have the Readable Trait.
+
+The read method can read the corresponding raw pointer through the 'inner'.
+And write method can write the corresponding raw pointer through the 'inner'.
+And the inner pointer field `self.0' is not public, thus can only be accessed indirectly by its public functions.

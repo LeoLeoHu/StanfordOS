@@ -1,0 +1,1 @@
+Implement static function with #![feature(const_fn)] for const value.

@@ -1,0 +1,1 @@
+"use a::MyTrait" introduces the "foo" into the currrent scope.

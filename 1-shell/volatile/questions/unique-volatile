@@ -1,0 +1,9 @@
+Volatile returns a new `Volatile` that allows volatile read/write access to `ptr`.
+This type allows aliasing the value pointed to by `ptr` and thus cannot implement `Send + Send`.
+
+UniqueVolatile returns a new `UniqueVolatile` that allows volatile read/write access to `ptr`.
+Furthermore, unlike `Volatile`, `ptr` must be the only accessible mutable reference to the value. 
+This is equivalent to casting the `*mut T` to `&'static mut T`.
+
+Send: Types that can be transferred across thread boundaries.
+Sync: Types for which it is safe to share references between threads.

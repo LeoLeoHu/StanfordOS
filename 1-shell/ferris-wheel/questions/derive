@@ -1,0 +1,2 @@
+Assert #[derive(Debug)] to format user type(enum/struct);
+Assert #[derive(Clone, Copy)] to copy user type(enum/struct).

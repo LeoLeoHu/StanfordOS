@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["SliceExt","Extension methods for slices."]]});

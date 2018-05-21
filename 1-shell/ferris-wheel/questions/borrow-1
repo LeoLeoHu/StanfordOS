@@ -1,0 +1,2 @@
+Cannot move out the reference. 
+Adding #[derive(Clone, Copy)] makes z takes the reference of x.

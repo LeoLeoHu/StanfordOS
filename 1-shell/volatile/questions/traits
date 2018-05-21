@@ -1,0 +1,2 @@
+#1. By extracting the common function into a trait, the code can be more pithy.
+#2. It's convenient to modify the universal function when they're included in a trait.

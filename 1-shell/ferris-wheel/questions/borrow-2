@@ -1,0 +1,1 @@
+At any given time, you can have either (but not both of) one mutable reference or any number of immutable references.

@@ -1,0 +1,1 @@
+{"rustc":10694955584413075917,"features":"[]","target":16561328026845539216,"profile":16680964171932368876,"path":10872709659218687626,"deps":[],"local":[{"Precalculated":"1526371434.444061000s (/home/leohu/Documents/cs140e/os/std/src/sync/mutex.rs)"}],"rustflags":["--sysroot","/home/leohu/.xargo/HOST"]}
