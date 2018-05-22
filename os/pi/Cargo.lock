@@ -2,8 +2,13 @@
 name = "pi"
 version = "0.1.0"
 dependencies = [
+ "std 0.1.0",
  "volatile 0.1.0",
 ]
+
+[[package]]
+name = "std"
+version = "0.1.0"
 
 [[package]]
 name = "volatile"
