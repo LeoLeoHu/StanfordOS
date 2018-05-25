@@ -1,0 +1,1 @@
+The Streaming SIMD Extensions require the address provided by the allocator to be 16-byte aligned when it is performing digital signal processing tasks.

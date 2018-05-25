@@ -1,6 +1,6 @@
 use atags::raw;
-use std::str;
-use std::ffi::CStr;
+use str;
+use std::ffi::c_str::CStr;
 use std::os::raw::c_char;
 
 pub use atags::raw::{Core, Mem};
@@ -55,8 +55,8 @@ impl<'a> From<&'a raw::Atag> for Atag {
                 (raw::Atag::CORE, &raw::Kind { core }) => Atag::Core(core),
                 (raw::Atag::MEM, &raw::Kind { mem }) => Atag::Mem(mem),
                 (raw::Atag::CMDLINE, &raw::Kind { ref cmd }) => {
-                    let cmdline = CStr::form_ptr((&cmd.cmd as *const u8) as *const c_char);
-                    Atag::Cmd(str::from_utf8_unchecked(cmdline.to_bytes()));
+                    let cmdline = CStr::from_ptr((&cmd.cmd as *const u8) as *const c_char);
+                    Atag::Cmd(str::from_utf8_unchecked(cmdline.to_bytes()))
                 },
                 (raw::Atag::NONE, _) => Atag::None,
                 (id, _) => Atag::Unknown(id),
