@@ -1,0 +1,6 @@
+First, direct the cluster of the root directory by referring the EBPB;
+Second, find the directory entry which has the filename of "a" in the root directory and direct to its cluster;
+...
+Lastly, find the cluster of file "c.txt" in the directory entry of "b".
+
+directory and directory entry are different
