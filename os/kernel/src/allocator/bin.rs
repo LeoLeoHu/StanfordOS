@@ -37,7 +37,7 @@ impl Allocator {
 
         Allocator {
             free_list: free_list,
-            alocated: 0,
+            allocated: 0,
             total,
         }
     }

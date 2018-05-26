@@ -21,6 +21,7 @@ impl Atag {
     /// Returns the ATAG following `self`, if there is one.
     pub fn next(&self) -> Option<&Atag> {
         unsafe{
+            // raw pointers and pointer arithmetic
             let self_tag = (self as *const Atag) as *const u32;
             let next_tag = self_tag.offset(self.dwords as isize) as *mut Atag;
 

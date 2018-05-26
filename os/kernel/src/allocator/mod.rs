@@ -1,7 +1,7 @@
 mod linked_list;
 mod util;
 
-#[path = "bump.rs"]
+#[path = "bin.rs"]
 mod imp;
 
 #[cfg(test)]
@@ -90,7 +90,7 @@ extern "C" {
 fn memory_map() -> Option<(usize, usize)> {
     let binary_end = unsafe { (&_end as *const u8) as usize };
 
-    for tag in Atag::get() {
+    for tag in Atags::get() {
         match tag.mem() {
             Some(mem) => {
                 let mut start = mem.start as usize;
@@ -103,4 +103,5 @@ fn memory_map() -> Option<(usize, usize)> {
             _ => {}
         }
     }
+    None
 }
