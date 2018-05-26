@@ -18,12 +18,21 @@ impl Atags {
             ptr: unsafe { &*(ATAG_BASE as *const raw::Atag) }
         }
     }
+    pub fn current(&self) -> Atag {
+        Atag::from(self.ptr)
+    }
 }
 
 impl Iterator for Atags {
     type Item = Atag;
 
     fn next(&mut self) -> Option<Atag> {
-        unimplemented!("atags iterator")
+        match self.ptr.next() {
+            Some(raw_atag) => {
+                self.ptr = raw_atag;
+                Some(Atag::from(raw_atag))
+            },
+            _ => None,
+        }
     }
 }

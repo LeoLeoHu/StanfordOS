@@ -28,6 +28,7 @@ use allocator::Allocator;
 use fs::FileSystem;
 use pi::timer::spin_sleep_ms;
 use pi::gpio::Gpio;
+use pi::atags::*;
 use console::kprintln;
 
 #[cfg(not(test))]
@@ -40,21 +41,48 @@ pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
 #[cfg(not(test))]
 pub extern "C" fn kmain() {
     // ALLOCATOR.initialize();
-    
+   
+    spin_sleep_ms(5000);
+
+    check_atags();
+
     let mut gpio_05 = Gpio::new(05).into_output();
     loop {
         gpio_05.set();
         spin_sleep_ms(500);
-
-        let mut v = vec![];
-        for i in 0..1000 {
-            v.push(i);
-            kprintln!("{:?}", v);
-            kprintln!("i");
-        }
-
         gpio_05.clear();
         spin_sleep_ms(500);
-        kprintln!("2");
+        // kprintln!("2");
+    }
+}
+
+fn check_atags() {
+    kprintln!("iterating ATAGS...");
+
+    let mut this_atags = Atags::get();
+    let mut this_atag = this_atags.current();
+
+    loop {
+        match this_atag {
+            // visit pi::atags::atag::Atag::Core through pi::atags::*;
+            // pi::atags::Atag::Core(core) => 
+            //     kprintln!("atag core: {:#?}", core),
+            Atag::Core(core) => 
+                kprintln!("atag core: {:#?}", core),
+            Atag::Mem(mem) =>
+                kprintln!("atag mem: {:#?}", mem),
+            Atag::Cmd(cmd) =>
+                kprintln!("atag cmd: {:#?}", cmd),
+            Atag::Unknown(id) =>
+                kprintln!("atag unknown: {:#?}", id),
+            Atag::None =>
+                kprintln!("atag none"),
+        }
+        match this_atags.next() {
+            Some(next_atag) => {
+                this_atag = next_atag;
+            },
+            None => break,
+        }
     }
 }

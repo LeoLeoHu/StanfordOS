@@ -1,7 +1,5 @@
 use atags::raw;
-// use std::str;
-// use std::ffi::CStr;
-// use std::os::raw::c_char;
+extern crate std;
 
 pub use atags::raw::{Core, Mem};
 
@@ -43,20 +41,34 @@ impl Atag {
 }
 
 // FIXME: Implement `From<raw::Core>`, `From<raw::Mem>`, and `From<&raw::Cmd>`
-// for `Atag`. These implementations should be used by the `From<&raw::Atag> for
+// for `Atag`. 
+// These implementations should be used by the `From<&raw::Atag> for
 // Atag` implementation below.
 
 impl<'a> From<&'a raw::Atag> for Atag {
     fn from(atag: &raw::Atag) -> Atag {
         // FIXME: Complete the implementation below.
+        
+        use self::std::str;
+        use self::std::slice;
 
         unsafe {
             match (atag.tag, &atag.kind) {
-                (raw::Atag::CORE, &raw::Kind { core }) => unimplemented!(),
-                (raw::Atag::MEM, &raw::Kind { mem }) => unimplemented!(),
-                (raw::Atag::CMDLINE, &raw::Kind { ref cmd }) => unimplemented!(),
-                (raw::Atag::NONE, _) => unimplemented!(),
-                (id, _) => unimplemented!(),
+                (raw::Atag::CORE, &raw::Kind { core }) => Atag::Core(core),
+                (raw::Atag::MEM, &raw::Kind { mem }) => Atag::Mem(mem),
+                (raw::Atag::CMDLINE, &raw::Kind { ref cmd }) => {
+                    // extract the string using the first byte
+                    let start = cmd.cmd as *mut u8;
+                    let mut end = cmd.cmd as *mut u8;
+                    while *end != '\0' as u8 {
+                        end = end.add(1);
+                    }
+                    let len = end as usize - start as usize;
+                    // convert a slice of bytes to a string slice
+                    Atag::Cmd(str::from_utf8(slice::from_raw_parts(start, len)).unwrap_or_default())
+                },
+                (raw::Atag::NONE, _) => Atag::None,
+                (id, _) => Atag::Unknown(id),
             }
         }
     }
