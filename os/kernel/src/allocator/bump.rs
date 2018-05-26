@@ -42,7 +42,7 @@ impl Allocator {
     pub fn alloc(&mut self, layout: Layout) -> Result<*mut u8, AllocErr> {
         let this_start = align_up(self.current, layout.align());
         if this_start.saturating_add(layout.size()) >= self.end {
-            return Err(AlloErr::Exhausted { request: layout } );
+            return Err(AllocErr::Exhausted { request: layout } );
         }
         self.current = this_start.saturating_add(layout.size());
         Ok(this_start as *mut u8)

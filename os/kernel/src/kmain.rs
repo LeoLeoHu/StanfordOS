@@ -26,6 +26,8 @@ pub mod fs;
 #[cfg(not(test))]
 use allocator::Allocator;
 use fs::FileSystem;
+use console::kprintln;
+use pi::timer::spin_sleep_ms;
 
 #[cfg(not(test))]
 #[global_allocator]
@@ -36,5 +38,13 @@ pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
 #[no_mangle]
 #[cfg(not(test))]
 pub extern "C" fn kmain() {
-    ALLOCATOR.initialize();
+    // ALLOCATOR.initialize();
+    
+    spin_sleep_ms(2000);
+
+    let mut v = vec![];
+    for i in 0..1000 {
+        v.push(i);
+        kprintln!("{:?}", v);
+    }
 }
