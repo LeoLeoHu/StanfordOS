@@ -26,8 +26,9 @@ pub mod fs;
 #[cfg(not(test))]
 use allocator::Allocator;
 use fs::FileSystem;
-use console::kprintln;
 use pi::timer::spin_sleep_ms;
+use pi::gpio::Gpio;
+use console::kprintln;
 
 #[cfg(not(test))]
 #[global_allocator]
@@ -40,11 +41,20 @@ pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
 pub extern "C" fn kmain() {
     // ALLOCATOR.initialize();
     
-    spin_sleep_ms(2000);
+    let mut gpio_05 = Gpio::new(05).into_output();
+    loop {
+        gpio_05.set();
+        spin_sleep_ms(500);
 
-    let mut v = vec![];
-    for i in 0..1000 {
-        v.push(i);
-        kprintln!("{:?}", v);
+        let mut v = vec![];
+        for i in 0..1000 {
+            v.push(i);
+            kprintln!("{:?}", v);
+            kprintln!("i");
+        }
+
+        gpio_05.clear();
+        spin_sleep_ms(500);
+        kprintln!("2");
     }
 }

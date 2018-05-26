@@ -1,7 +1,7 @@
 mod linked_list;
 mod util;
 
-#[path = "bin.rs"]
+#[path = "bump.rs"]
 mod imp;
 
 #[cfg(test)]
