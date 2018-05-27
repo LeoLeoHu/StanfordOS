@@ -5,9 +5,9 @@ pub extern fn panic_fmt(fmt: ::std::fmt::Arguments, file: &'static str, line: u3
     // FIXME: Print `fmt`, `file`, and `line` to the console.
     use console::kprintln;
     kprintln!("panic at:\n
-              FILE: {}\n
-              LINE: {}\n
-              COL: {}\n
+              FILE: {}
+              LINE: {}
+              COL: {}
               {}", file, line, col, fmt);
     
     // put the core in a low-power state by disabling the clocks in the core

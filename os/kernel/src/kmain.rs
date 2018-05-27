@@ -40,9 +40,9 @@ pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
 #[no_mangle]
 #[cfg(not(test))]
 pub extern "C" fn kmain() {
-    // ALLOCATOR.initialize();
-   
     spin_sleep_ms(5000);
+
+    // ALLOCATOR.initialize();
 
     check_atags();
 
