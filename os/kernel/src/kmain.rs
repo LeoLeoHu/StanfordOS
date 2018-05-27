@@ -42,18 +42,11 @@ pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
 pub extern "C" fn kmain() {
     spin_sleep_ms(5000);
 
-    // ALLOCATOR.initialize();
+    ALLOCATOR.initialize();
 
     check_atags();
-
-    let mut gpio_05 = Gpio::new(05).into_output();
-    loop {
-        gpio_05.set();
-        spin_sleep_ms(500);
-        gpio_05.clear();
-        spin_sleep_ms(500);
-        // kprintln!("2");
-    }
+    check_allocator();
+    check_gpio();
 }
 
 fn check_atags() {
@@ -65,8 +58,6 @@ fn check_atags() {
     loop {
         match this_atag {
             // visit pi::atags::atag::Atag::Core through pi::atags::*;
-            // pi::atags::Atag::Core(core) => 
-            //     kprintln!("atag core: {:#?}", core),
             Atag::Core(core) => 
                 kprintln!("atag core: {:#?}", core),
             Atag::Mem(mem) =>
@@ -82,7 +73,30 @@ fn check_atags() {
             Some(next_atag) => {
                 this_atag = next_atag;
             },
-            None => break,
+            None => {
+                kprintln!("\n");
+                break;
+            },
         }
+    }
+}
+
+fn check_allocator() {
+    kprintln!("iterator vector from 0 to 50...");
+    let mut v = vec![];
+    for i in 0..50 {
+        v.push(i);
+        kprintln!("{:?}", v);
+    }
+}
+
+fn check_gpio() {
+    kprintln!("checking gpio");
+    let mut gpio_05 = Gpio::new(05).into_output();
+    loop {
+        gpio_05.set();
+        spin_sleep_ms(500);
+        gpio_05.clear();
+        spin_sleep_ms(500);
     }
 }

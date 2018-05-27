@@ -10,7 +10,7 @@ mod tests;
 use mutex::Mutex;
 use alloc::heap::{Alloc, AllocErr, Layout};
 use std::cmp::max;
-use pi::atags::Atags;
+use pi::atags::*;
 
 /// Thread-safe (locking) wrapper around a particular memory allocator.
 #[derive(Debug)]
@@ -90,17 +90,32 @@ extern "C" {
 fn memory_map() -> Option<(usize, usize)> {
     let binary_end = unsafe { (&_end as *const u8) as usize };
 
-    for tag in Atags::get() {
-        match tag.mem() {
-            Some(mem) => {
-                let mut start = mem.start as usize;
-                let end = (mem.start + mem.size) as usize;
-                if binary_end < end {
-                    start = max(start, binary_end);
-                }
-                Some((start, end));
-            }
-            _ => {}
+    // returns an instance of 'Atags', an iterator over ATAGS on the system
+    let mut this_atags = Atags::get();
+    // returns an ATAG
+    let mut this_atag = this_atags.current();
+
+    loop {
+        match this_atag {
+            Atag::Mem(mem) => {
+                // let mut start = mem.start as usize;
+                // let end = (mem.start + mem.size) as usize;
+                // if binary_end < end {
+                //     start = max(start, binary_end);
+                // }
+                // return Some((start, end));
+                return Some((binary_end as usize, (mem.start + mem.size) as usize));
+            },
+            _ => {
+            },
+        }
+
+        // returns Option<Atag>
+        match this_atags.next() {
+            Some(next_atag) => {
+                this_atag = next_atag
+            },
+            None => break,
         }
     }
     None

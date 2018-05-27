@@ -1,0 +1,2 @@
+Nothing in my cmdline.
+ATAG_CMDLINE is used to pass the commandline to the kernel.
