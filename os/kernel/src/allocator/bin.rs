@@ -8,11 +8,12 @@ use allocator::linked_list::LinkedList;
 use std::mem::size_of;
 
 const SIZEOF_USIZE: usize = size_of::<usize>();
+const LINKEDLIST_NUM: usize = 32;
 
 /// A simple allocator that allocates based on size classes.
 pub struct Allocator {
     // FIXME: Add the necessary fields.
-    free_list: [LinkedList; 32],
+    free_list: [LinkedList; LINKEDLIST_NUM],
     allocated: usize,
     total: usize,
 }
@@ -21,18 +22,20 @@ impl Allocator {
     /// Creates a new bin allocator that will allocate memory from the region
     /// starting at address `start` and ending at address `end`.
     pub fn new(start: usize, end: usize) -> Allocator {
-        let mut free_list = [LinkedList::new(); 32];
+        let mut free_list = [LinkedList::new(); LINKEDLIST_NUM];
         let mut current_start = start;
 
         let mut total = 0;
         while current_start + SIZEOF_USIZE <= end {
-            let lowbit = current_start & (!current_start + 1);
-            let size = min(lowbit, prev_power_of_two(end - current_start));
-            total += size;
+            let truncated_low = current_start & (!current_start + 1);
+            let truncated_high = truncated_high(end - current_start);
+            let this_bin_size = min(truncated_low, truncated_high);
+            total += this_bin_size;
             unsafe {
-                free_list[size.trailing_zeros() as usize].push(current_start as *mut usize);
+                // the trailing-zero introduces the division of bins
+                free_list[this_bin_size.trailing_zeros() as usize].push(current_start as *mut usize);
             }
-            current_start += size;
+            current_start += this_bin_size;
         }
 
         Allocator {
@@ -68,18 +71,27 @@ impl Allocator {
             max(layout.align(), SIZEOF_USIZE),
             );
         let class = size.trailing_zeros() as usize;
+
+        // find the optimal and non-empty() linked-list(bin)
         for i in class..self.free_list.len() {
             if !self.free_list[i].is_empty() {
-                for j in (class + 1..i + 1).rev() {
-                    let block = self.free_list[j]
-                        .pop()
-                        .expect("bigger block should have free space");
-                    unsafe {
-                        self.free_list[j - 1].push((block as usize + (1 << (j - 1))) as *mut usize);
-                        self.free_list[j - 1].push(block);
-                    }
-                }
-                let result = Ok(self.free_list[class]
+
+                // for j in (class + 1..i + 1).rev() {
+                //     let block = self.free_list[j]
+                //         .pop()
+                //         .expect("bigger block should have free space");
+                //     unsafe {
+                //         self.free_list[j - 1].push((block as usize + (1 << (j - 1))) as *mut usize);
+                //         self.free_list[j - 1].push(block);
+                //     }
+                // }
+
+                // pop this allocation
+                // let result = Ok(self.free_list[class]
+                //                 .pop()
+                //                 .expect("current block should have free space now")
+                //                 as *mut u8);
+                let result = Ok(self.free_list[i]
                                 .pop()
                                 .expect("current block should have free space now")
                                 as *mut u8);
@@ -112,27 +124,29 @@ impl Allocator {
 
         unsafe {
             self.free_list[class].push(ptr as *mut usize);
-            let mut current_ptr = ptr as usize;
-            let mut current_class = class;
-            loop {
-                let buddy = current_ptr ^ (1 << current_class);
-                let mut flag = false;
-                for block in self.free_list[current_class].iter_mut() {
-                    if block.value() as usize == buddy {
-                        block.pop();
-                        flag = true;
-                        break;
-                    }
-                }
-                if flag {
-                    self.free_list[current_class].pop();
-                    current_ptr = min(current_ptr, buddy);
-                    current_class += 1;
-                    self.free_list[current_class].push(current_ptr as *mut usize);
-                } else {
-                    break;
-                }
-            }
+
+            // let mut current_ptr = ptr as usize;
+            // let mut current_class = class;
+            // loop {
+            //     let buddy = current_ptr ^ (1 << current_class);
+            //     let mut flag = false;
+            //     for block in self.free_list[current_class].iter_mut() {
+            //         if block.value() as usize == buddy {
+            //             block.pop();
+            //             flag = true;
+            //             break;
+            //         }
+            //     }
+            //     if flag {
+            //         self.free_list[current_class].pop();
+            //         current_ptr = min(current_ptr, buddy);
+            //         current_class += 1;
+            //         self.free_list[current_class].push(current_ptr as *mut usize);
+            //     } else {
+            //         break;
+            //     }
+            // }
+
         }
         self.allocated -= size;
     }
