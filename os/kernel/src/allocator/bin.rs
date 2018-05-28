@@ -29,13 +29,13 @@ impl Allocator {
         while current_start + SIZEOF_USIZE <= end {
             let truncated_low = current_start & (!current_start + 1);
             let truncated_high = truncated_high(end - current_start);
-            let this_bin_size = min(truncated_low, truncated_high);
-            total += this_bin_size;
+            let size = min(truncated_low, truncated_high);
+            total += size;
             unsafe {
                 // the trailing-zero introduces the division of bins
-                free_list[this_bin_size.trailing_zeros() as usize].push(current_start as *mut usize);
+                free_list[size.trailing_zeros() as usize].push(current_start as *mut usize);
             }
-            current_start += this_bin_size;
+            current_start += size;
         }
 
         Allocator {
@@ -76,6 +76,7 @@ impl Allocator {
         for i in class..self.free_list.len() {
             if !self.free_list[i].is_empty() {
 
+                // separate block(class + 1) into two parts even 'class' can satisfy ptr
                 // for j in (class + 1..i + 1).rev() {
                 //     let block = self.free_list[j]
                 //         .pop()
@@ -130,6 +131,7 @@ impl Allocator {
             // loop {
             //     let buddy = current_ptr ^ (1 << current_class);
             //     let mut flag = false;
+            //     // the first half that may be merged
             //     for block in self.free_list[current_class].iter_mut() {
             //         if block.value() as usize == buddy {
             //             block.pop();
@@ -138,9 +140,11 @@ impl Allocator {
             //         }
             //     }
             //     if flag {
+            //         // the second half that may be merged
             //         self.free_list[current_class].pop();
             //         current_ptr = min(current_ptr, buddy);
             //         current_class += 1;
+            //         // push the merged block into 'class + 1'
             //         self.free_list[current_class].push(current_ptr as *mut usize);
             //     } else {
             //         break;
