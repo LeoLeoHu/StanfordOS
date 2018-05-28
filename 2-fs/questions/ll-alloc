@@ -1,0 +1,3 @@
+There is no such a suitable allocator for us to maintain a linked-list table dynamically,
+if we choose the allocate-additional-memomry-on-push,
+because we're just starting building our basic allocator at this moment.
