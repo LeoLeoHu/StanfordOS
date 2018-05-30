@@ -77,25 +77,25 @@ impl Allocator {
             if !self.free_list[i].is_empty() {
 
                 // separate block(class + 1) into two parts even 'class' can satisfy ptr
-                // for j in (class + 1..i + 1).rev() {
-                //     let block = self.free_list[j]
-                //         .pop()
-                //         .expect("bigger block should have free space");
-                //     unsafe {
-                //         self.free_list[j - 1].push((block as usize + (1 << (j - 1))) as *mut usize);
-                //         self.free_list[j - 1].push(block);
-                //     }
-                // }
+                for j in (class + 1..i + 1).rev() {
+                    let block = self.free_list[j]
+                        .pop()
+                        .expect("bigger block should have free space");
+                    unsafe {
+                        self.free_list[j - 1].push((block as usize + (1 << (j - 1))) as *mut usize);
+                        self.free_list[j - 1].push(block);
+                    }
+                }
 
                 // pop this allocation
-                // let result = Ok(self.free_list[class]
-                //                 .pop()
-                //                 .expect("current block should have free space now")
-                //                 as *mut u8);
-                let result = Ok(self.free_list[i]
+                let result = Ok(self.free_list[class]
                                 .pop()
                                 .expect("current block should have free space now")
                                 as *mut u8);
+                // let result = Ok(self.free_list[i]
+                //                 .pop()
+                //                 .expect("current block should have free space now")
+                //                 as *mut u8);
                 self.allocated += size;
                 return result;
             }
@@ -126,30 +126,30 @@ impl Allocator {
         unsafe {
             self.free_list[class].push(ptr as *mut usize);
 
-            // let mut current_ptr = ptr as usize;
-            // let mut current_class = class;
-            // loop {
-            //     let buddy = current_ptr ^ (1 << current_class);
-            //     let mut flag = false;
-            //     // the first half that may be merged
-            //     for block in self.free_list[current_class].iter_mut() {
-            //         if block.value() as usize == buddy {
-            //             block.pop();
-            //             flag = true;
-            //             break;
-            //         }
-            //     }
-            //     if flag {
-            //         // the second half that may be merged
-            //         self.free_list[current_class].pop();
-            //         current_ptr = min(current_ptr, buddy);
-            //         current_class += 1;
-            //         // push the merged block into 'class + 1'
-            //         self.free_list[current_class].push(current_ptr as *mut usize);
-            //     } else {
-            //         break;
-            //     }
-            // }
+            let mut current_ptr = ptr as usize;
+            let mut current_class = class;
+            loop {
+                let buddy = current_ptr ^ (1 << current_class);
+                let mut flag = false;
+                // the first half that may be merged
+                for block in self.free_list[current_class].iter_mut() {
+                    if block.value() as usize == buddy {
+                        block.pop();
+                        flag = true;
+                        break;
+                    }
+                }
+                if flag {
+                    // the second half that may be merged
+                    self.free_list[current_class].pop();
+                    current_ptr = min(current_ptr, buddy);
+                    current_class += 1;
+                    // push the merged block into 'class + 1'
+                    self.free_list[current_class].push(current_ptr as *mut usize);
+                } else {
+                    break;
+                }
+            }
 
         }
         self.allocated -= size;
