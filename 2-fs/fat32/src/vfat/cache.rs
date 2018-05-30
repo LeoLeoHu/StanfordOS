@@ -1,4 +1,5 @@
 use std::{io, fmt};
+use std::io::Read;
 use std::collections::HashMap;
 
 use traits::BlockDevice;
@@ -81,7 +82,10 @@ impl CachedDevice {
     ///
     /// Returns an error if there is an error reading the sector from the disk.
     pub fn get_mut(&mut self, sector: u64) -> io::Result<&mut [u8]> {
-        unimplemented!("CachedDevice::get_mut()")
+        self.get(sector)?;
+        let entry = self.cache.get_mut(&sector).unwrap();
+        entry.dirty = true;
+        Ok(entry.data.as_mut_slice())
     }
 
     /// Returns a reference to the cached sector `sector`. If the sector is not
@@ -91,12 +95,52 @@ impl CachedDevice {
     ///
     /// Returns an error if there is an error reading the sector from the disk.
     pub fn get(&mut self, sector: u64) -> io::Result<&[u8]> {
-        unimplemented!("CachedDevice::get()")
+        if !self.cache.contains_key(&sector) {
+
+            let (physical_sector, factor) = self.virtual_to_physical(sector);
+            let physical_sector_size = self.device.sector_size();
+            let logical_sector_size = self.partition.sector_size as usize;
+
+            let mut new_vec = Vec::with_capacity(logical_sector_size);
+            new_vec.resize(logical_sector_size, 0);
+
+            for i in 0..factor {
+                self.device.read_sector(
+                    physical_sector + i,
+                    &mut new_vec[(i * factor) as usize..],
+                    )?;
+            }
+
+            self.cache.insert(sector, CacheEntry {
+                data: new_vec,
+                dirty: false,
+            });
+        }
+
+        Ok(&self.cache[&sector].data[..])
     }
 }
 
 // FIXME: Implement `BlockDevice` for `CacheDevice`. The `read_sector` and
 // `write_sector` methods should only read/write from/to cached sectors.
+impl BlockDevice for CachedDevice {
+    fn sector_size(&self) -> u64 {
+        self.partition.sector_size
+    }
+
+    fn read_sector(&mut self, n: u64, buf: &mut [u8]) -> io::Result<usize> {
+        if self.cache.contains_key(&n) {
+            let cache_entry = &self.cache[&n];
+            io::Cursor::new(&cache_entry.data).read(buf)
+        } else {
+            Err(io::Error::new(io::ErrorKind::Interrupted, "data not cached yet"))
+        }
+    }
+
+    fn write_sector(&mut self, n: u64, buf: &[u8]) -> io::Result<usize> {
+        unimplemented!();
+    }
+}
 
 impl fmt::Debug for CachedDevice {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
