@@ -80,7 +80,7 @@ impl MasterBootRecord {
         }
     }
 
-    pub fn first_vfat_partition(&self) -> Option<u32> {
+    pub fn fat_start_sector(&self) -> Option<u32> {
         for i in 0..4 {
             if self.partitions[i].partition_type == 0xb
                 || self.partitions[i].partition_type == 0x0c {

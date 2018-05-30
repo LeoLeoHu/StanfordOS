@@ -12,10 +12,10 @@ pub struct BiosParameterBlock {
     OEM: [u8; 8],
 
     // DOS 2.0 BPB
-    bytes_per_logical_sector: u16,
-    logical_sectors_per_cluster: u8,
-    reserved_logical_sectors: u16,
-    num_of_FATs: u8,
+    pub(super) bytes_per_logical_sector: u16,
+    pub(super) logical_sectors_per_cluster: u8,
+    pub(super) reserved_logical_sectors: u16,
+    pub(super) num_of_FATs: u8,
     root_directory_entries: u16,
     total_logical_sectors: u16,
     media_descriptor: u8,
@@ -31,7 +31,7 @@ pub struct BiosParameterBlock {
     logical_sectors_per_FAT_1: u32,
     mirroring_flag: u16,
     version: u16,
-    root_directory_cluster: u32,
+    pub(super) root_directory_cluster: u32,
     FSInfo: u16,
     backup_boot_sector: u16,
     _reserved: [u8; 12],
