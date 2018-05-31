@@ -129,7 +129,43 @@ impl VFat {
     //  * A method to read all of the clusters chained from a starting cluster
     //    into a vector.
     fn read_chain(&mut self, start: Cluster, buf: &mut Vec<u8>) -> io::Result<usize> {
-        unimplemented!();
+        // Floyd's Cycle Detection Algorithm
+        // This is the tortoise
+        let mut current_cluster = start;
+        // This is the hare
+        let mut hare_cluster = self.next_cluster(start)?;
+
+        let mut current_cluster_num = 0;
+        let bytes_per_cluster = self.bytes_per_sector as usize * self.sectors_per_cluster as usize;
+
+        while Some(current_cluster) != hare_cluster {
+            current_cluster_num += 1;
+            buf.resize(bytes_per_cluster * current_cluster_num, 0);
+            self.read_cluster(current_cluster, 0,
+                              &mut buf[bytes_per_cluster * (current_cluster_num - 1)..])?;
+
+            match self.next_cluster(current_cluster)? {
+                Some(next_cluster) => {
+                    current_cluster = next_cluster;
+                },
+                None => {
+                    // end of chain
+                    return Ok(bytes_per_cluster * current_cluster_num);
+                }
+            }
+
+            // tortoise and hare are at different speed
+            if let Some(cluster) = hare_cluster {
+                hare_cluster = self.next_cluster(cluster)?;
+            }
+            if let Some(cluster) = hare_cluster {
+                hare_cluster = self.next_cluster(cluster)?;
+            }
+        }
+        Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                "Cycle detected in cluster chain",
+                ))
     }
 
     //  * A method to return a reference to a `FatEntry` for a cluster where the
