@@ -63,14 +63,12 @@ impl VFat {
 
     }
 
-    // TODO: The following methods may be useful here:
-    //
     //  * A method to read from an offset of a cluster into a buffer.
     fn read_cluster(&mut self, cluster: Cluster, offset: usize, buf: &mut [u8]) -> io::Result<usize> {
         if !cluster.is_valid() {
             return Err(io::Error::new(
                     io::ErrorKind::InvalidInput,
-                    "unable to locate this cluster",
+                    "Invalid cluster number",
                     ).into());
         }
         let sector_size = self.device.sector_size() as usize;
@@ -101,23 +99,54 @@ impl VFat {
         Ok(bytes_read)
     }
 
-    fn next_cluster(&self, cluster: Cluster) -> Result<
-    
+    fn next_cluster(&mut self, cluster: Cluster) -> io::Result<Option<Cluster>> {
+        if !cluster.is_valid() {
+            return Err(io::Error::new(
+                    io::ErrorKind::InvalidInput,
+                    "Invalid cluster number",
+                    ).into());
+        }
+
+        match self.fat_entry(cluster)?.status() {
+            Status::Eoc(_) => Ok(None),
+            Status::Data(next_cluster) => {
+                if !next_cluster.is_valid() {
+                    return Err(io::Error::new(
+                            io::ErrorKind::InvalidInput,
+                            "Invalid next cluster number",
+                            ).into());
+                } else{ 
+                    Ok(Some(next_cluster))
+                }
+            }
+            _ => Err(io::Error::new(
+                    io::ErrorKind::InvalidData,
+                    "Invalid next cluster number",
+                    )),
+        }
+    }
+
     //  * A method to read all of the clusters chained from a starting cluster
     //    into a vector.
-    //
-    //    fn read_chain(
-    //        &mut self,
-    //        start: Cluster,
-    //        buf: &mut Vec<u8>
-    //    ) -> io::Result<usize>;
-    //
+    fn read_chain(&mut self, start: Cluster, buf: &mut Vec<u8>) -> io::Result<usize> {
+        unimplemented!();
+    }
+
     //  * A method to return a reference to a `FatEntry` for a cluster where the
     //    reference points directly into a cached sector.
-    //
-    //    fn fat_entry(&mut self, cluster: Cluster) -> io::Result<&FatEntry>;
     pub(super) fn fat_entry(&mut self, cluster: Cluster) -> io::Result<&FatEntry> {
-        unimplemented!()
+        // cluster corresponds to its FatEntry successively
+        // still, cluster does not corresponds to the value of its FatEntry
+        let sector_this_fatentry: u64 = cluster.cluster_num() as u64 * size_of::<FatEntry>() as u64
+            / self.bytes_per_sector as u64;
+        let bytes_remain_this_fatentry: usize = cluster.cluster_num() as usize * size_of::<FatEntry>()
+            % self.bytes_per_sector as usize;
+        let content = self.device.get(self.fat_start_sector + sector_this_fatentry)?;
+        let entries: &[FatEntry] = unsafe {
+            content.cast()
+        };
+        // several FatEntries in this content sector
+        Ok(&entries[bytes_remain_this_fatentry / size_of::<FatEntry>()])
     }
         
 }
