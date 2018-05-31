@@ -41,7 +41,6 @@ impl VFat {
                         "unsupported logical sector size",
                         )));
         }
-        let sectors_per_fat = ebpb.logical_sectors_per_FAT();
         let cached_device = CachedDevice::new(
             device,
             Partition{
@@ -49,6 +48,7 @@ impl VFat {
                 sector_size: ebpb.bytes_per_logical_sector as u64,
             },
             );
+        let sectors_per_fat = ebpb.logical_sectors_per_FAT();
 
         Ok(Shared::new(VFat{
             device: cached_device,
@@ -57,7 +57,7 @@ impl VFat {
             sectors_per_fat: sectors_per_fat,
             fat_start_sector: fat_start_sector + ebpb.reserved_logical_sectors as u64,
             data_start_sector: fat_start_sector + ebpb.reserved_logical_sectors as u64
-            + sectors_per_fat as u64 * ebpb.num_of_FATs as u64,
+                + sectors_per_fat as u64 * ebpb.num_of_FATs as u64,
             root_dir_cluster: Cluster::from(ebpb.root_directory_cluster),
         }))
 
@@ -66,14 +66,43 @@ impl VFat {
     // TODO: The following methods may be useful here:
     //
     //  * A method to read from an offset of a cluster into a buffer.
-    //
-    //    fn read_cluster(
-    //        &mut self,
-    //        cluster: Cluster,
-    //        offset: usize,
-    //        buf: &mut [u8]
-    //    ) -> io::Result<usize>;
-    //
+    fn read_cluster(&mut self, cluster: Cluster, offset: usize, buf: &mut [u8]) -> io::Result<usize> {
+        if !cluster.is_valid() {
+            return Err(io::Error::new(
+                    io::ErrorKind::InvalidInput,
+                    "unable to locate this cluster",
+                    ).into());
+        }
+        let sector_size = self.device.sector_size() as usize;
+        let bytes_need_to_read = min(
+            self.device.sector_size() as usize * self.sectors_per_cluster as usize - offset,
+            buf.len());
+
+        let mut bytes_offset_remain = offset % self.device.sector_size() as usize;
+        let mut sector_to_read = self.data_start_sector + cluster.cluster_index() as u64 * self.sectors_per_cluster as u64
+            - offset as u64 % self.device.sector_size() as u64;
+        let mut bytes_read = 0;
+
+        while bytes_read < bytes_need_to_read {
+            let this_copy = self.device.get(sector_to_read)?;
+
+            // bytes_need_to_read can be less than device.sector_size()
+            // there is no offset after first loop
+            // but still need to decide whether to copy the entire sector
+            let bytes_this_copy = min(bytes_need_to_read - bytes_read, sector_size - bytes_offset_remain);
+            
+            buf[bytes_read..bytes_read + bytes_this_copy].copy_from_slice(
+                &this_copy[bytes_offset_remain..bytes_offset_remain + bytes_this_copy]);
+
+            bytes_offset_remain = 0;
+            bytes_read += bytes_this_copy;
+            sector_to_read += 1;
+        }
+        Ok(bytes_read)
+    }
+
+    fn next_cluster(&self, cluster: Cluster) -> Result<
+    
     //  * A method to read all of the clusters chained from a starting cluster
     //    into a vector.
     //
@@ -87,6 +116,10 @@ impl VFat {
     //    reference points directly into a cached sector.
     //
     //    fn fat_entry(&mut self, cluster: Cluster) -> io::Result<&FatEntry>;
+    pub(super) fn fat_entry(&mut self, cluster: Cluster) -> io::Result<&FatEntry> {
+        unimplemented!()
+    }
+        
 }
 
 impl<'a> FileSystem for &'a Shared<VFat> {
@@ -104,15 +137,15 @@ impl<'a> FileSystem for &'a Shared<VFat> {
 
     fn create_dir<P>(self, _path: P, _parents: bool) -> io::Result<Self::Dir>
         where P: AsRef<Path>
-        {
-            unimplemented!("read only file system")
-        }
+    {
+        unimplemented!("read only file system")
+    }
 
     fn rename<P, Q>(self, _from: P, _to: Q) -> io::Result<()>
         where P: AsRef<Path>, Q: AsRef<Path>
-        {
-            unimplemented!("read only file system")
-        }
+    {
+        unimplemented!("read only file system")
+    }
 
     fn remove<P: AsRef<Path>>(self, _path: P, _children: bool) -> io::Result<()> {
         unimplemented!("read only file system")
