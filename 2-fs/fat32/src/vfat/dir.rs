@@ -20,7 +20,7 @@ pub struct Dir {
     pub(super) metadata: Metadata,
 }
 
-#[repr(C, packed)]
+#[repr(C, align(32))]
 #[derive(Copy, Clone, Debug)]
 pub struct VFatRegularDirEntry {
     // FIXME: Fill me in.

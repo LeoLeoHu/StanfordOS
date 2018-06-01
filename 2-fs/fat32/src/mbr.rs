@@ -26,7 +26,7 @@ pub struct PartitionEntry {
 }
 
 /// The master boot record (MBR).
-#[repr(C, packed)]
+#[repr(C, align(512))]
 #[allow(non_snake_case)]
 pub struct MasterBootRecord {
     // FIXME: Fill me in.

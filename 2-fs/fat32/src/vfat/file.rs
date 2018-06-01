@@ -2,7 +2,7 @@ use std::cmp::{min, max};
 use std::io::{self, SeekFrom};
 
 use traits;
-use vfat::{Cluster, Metadata, Shared, Status, VFat};
+use vfat::{Cluster, Metadata, Status, Shared, VFat};
 use std::fmt;
 
 pub struct File {

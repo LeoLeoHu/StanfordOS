@@ -25,6 +25,7 @@ pub struct Timestamp {
 }
 
 /// Metadata for a directory entry.
+#[repr(C, packed)]
 #[derive(Copy, Default, Clone)]
 pub struct Metadata {
     // FIXME: Fill me in.

@@ -1,3 +1,5 @@
+#![feature(repr_align)]
+#![feature(attr_literals)]
 #![feature(decl_macro, conservative_impl_trait)]
 #![allow(safe_packed_borrows)]
 
