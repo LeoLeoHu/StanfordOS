@@ -12,12 +12,12 @@ use traits::{FileSystem, BlockDevice};
 #[derive(Debug)]
 pub struct VFat {
     device: CachedDevice,
-    bytes_per_sector: u16,
-    sectors_per_cluster: u8,
+    pub(super) bytes_per_sector: u16,
+    pub(super) sectors_per_cluster: u8,
     sectors_per_fat: u32,
     fat_start_sector: u64,
     data_start_sector: u64,
-    root_dir_cluster: Cluster,
+    pub(super) root_dir_cluster: Cluster,
 }
 
 impl VFat {
