@@ -18,14 +18,14 @@ pub struct Time(u16);
 pub struct Attributes(u8);
 
 /// A structure containing a date and time.
-#[derive(Default, Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct Timestamp {
     pub date: Date,
     pub time: Time
 }
 
 /// Metadata for a directory entry.
-#[derive(Default, Debug, Clone)]
+#[derive(Default, Clone)]
 pub struct Metadata {
     // FIXME: Fill me in.
     pub(super) attributes: Attributes,
@@ -125,3 +125,31 @@ impl traits::Metadata for Metadata {
 }
 
 // FIXME: Implement `fmt::Display` (to your liking) for `Metadata`.
+impl fmt::Debug for Metadata {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        use traits::Metadata;
+        f.debug_struct("Metadata")
+            .field("read_only", &self.read_only())
+            .field("hidden", &self.hidden())
+            .field("created", &self.created())
+            .field("accessed", &self.accessed())
+            .field("modified", &self.modified())
+            .finish()
+    }
+}
+
+impl fmt::Debug for Timestamp {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    use traits::Timestamp;
+    f.write_fmt(format_args!(
+            "{:04}-{:02}-{:02} {:02}:{:02}:{:02}",
+            self.year(), self.month(), self.day(),
+            self.hour(), self.minute(), self.second()))
+    }
+}
+
+impl Metadata {
+    pub(super) fn first_cluster(&self) -> u32 {
+        ((self.first_cluster_high as u32) << 16) | self.first_cluster_low as u32
+    }
+}
