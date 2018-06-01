@@ -25,7 +25,7 @@ pub struct Dir {
 pub struct VFatRegularDirEntry {
     // FIXME: Fill me in.
     short_file_name: [u8; 8],
-    short_file_extention: [u8; 3],
+    short_file_extension: [u8; 3],
     metadata: Metadata,
     file_size: u32,
 }

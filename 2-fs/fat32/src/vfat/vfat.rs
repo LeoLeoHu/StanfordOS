@@ -1,5 +1,5 @@
 use std::io;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::mem::size_of;
 use std::cmp::min;
 
@@ -8,6 +8,7 @@ use mbr::MasterBootRecord;
 use vfat::{Shared, Cluster, File, Dir, Entry, FatEntry, Error, Status};
 use vfat::{BiosParameterBlock, CachedDevice, Partition};
 use traits::{FileSystem, BlockDevice};
+use std::path::Component;
 
 #[derive(Debug)]
 pub struct VFat {
@@ -64,7 +65,7 @@ impl VFat {
     }
 
     //  * A method to read from an offset of a cluster into a buffer.
-    fn read_cluster(&mut self, cluster: Cluster, offset: usize, buf: &mut [u8]) -> io::Result<usize> {
+    pub(super) fn read_cluster(&mut self, cluster: Cluster, offset: usize, buf: &mut [u8]) -> io::Result<usize> {
         if !cluster.is_valid() {
             return Err(io::Error::new(
                     io::ErrorKind::InvalidInput,
@@ -128,7 +129,7 @@ impl VFat {
 
     //  * A method to read all of the clusters chained from a starting cluster
     //    into a vector.
-    fn read_chain(&mut self, start: Cluster, buf: &mut Vec<u8>) -> io::Result<usize> {
+    pub(super) fn read_chain(&mut self, start: Cluster, buf: &mut Vec<u8>) -> io::Result<usize> {
         // Floyd's Cycle Detection Algorithm
         // This is the tortoise
         let mut current_cluster = start;
@@ -187,13 +188,76 @@ impl VFat {
         
 }
 
-impl<'a> FileSystem for &'a Shared<VFat> {
-    type File = ::traits::Dummy;
-    type Dir = ::traits::Dummy;
-    type Entry = ::traits::Dummy;
+impl Shared<VFat> {
+    fn get_entries<P: AsRef<Path>>(&self, path_ref: P) -> io::Result<Vec<Entry>> {
+        let path = path_ref.as_ref();
+        if !path.is_absolute() {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "path must be absolute",
+            ));
+        }
 
-    fn open<P: AsRef<Path>>(self, path: P) -> io::Result<Self::Entry> {
-        unimplemented!("FileSystem::open()")
+        let mut dir_entries = Vec::new();
+        for component in path.components() {
+            match component {
+                Component::RootDir => {
+                    dir_entries.truncate(0);
+                    dir_entries.push(Entry::Dir(Dir::new_root(self)))
+                }
+                Component::CurDir => {} // do nothing
+                Component::Normal(name) => {
+                    use traits::Entry;
+                    let new_entry = match dir_entries.last() {
+                        Some(current_entry) => match current_entry.as_dir() {
+                            Some(dir) => dir.find(name)?,
+                            None => {
+                                return Err(io::Error::new(
+                                    io::ErrorKind::NotFound,
+                                    "file not found",
+                                ))
+                            }
+                        },
+                        None => return Err(io::Error::from(io::ErrorKind::NotFound)),
+                    };
+                    dir_entries.push(new_entry);
+                }
+                Component::ParentDir => {
+                    if dir_entries.len() > 0 {
+                        dir_entries.pop();
+                    } else {
+                        return Err(io::Error::from(io::ErrorKind::NotFound));
+                    }
+                }
+                _ => unimplemented!(),
+            }
+        }
+        Ok(dir_entries)
+    }
+}
+
+impl<'a> FileSystem for &'a Shared<VFat> {
+    type File = File;
+    type Dir = Dir;
+    type Entry = Entry;
+
+    fn open<P: AsRef<Path>>(self, path_ref: P) -> io::Result<Self::Entry> {
+        let dir_entries = self.get_entries(path_ref)?;
+
+        match dir_entries.into_iter().last() {
+            Some(current_entry) => Ok(current_entry),
+            None => Err(io::Error::from(io::ErrorKind::NotFound)),
+        }
+    }
+
+    fn canonicalize<P: AsRef<Path>>(self, path_ref: P) -> io::Result<PathBuf> {
+        let dir_entries = self.get_entries(path_ref)?;
+        let mut result = PathBuf::from("/");
+        for entry in dir_entries {
+            use traits::Entry;
+            result.push(entry.name());
+        }
+        Ok(result)
     }
 
     fn create_file<P: AsRef<Path>>(self, _path: P) -> io::Result<Self::File> {
