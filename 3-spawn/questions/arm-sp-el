@@ -1,0 +1,6 @@
+adr x0, B
+msr SP_ELx, x0
+mov x0, 1
+msr SPSR, x0
+
+M[0] = 1 means the exception SP is determined by the EL. (AArch64)

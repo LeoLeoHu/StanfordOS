@@ -1,0 +1,1 @@
+The SPRSR.M field (bit 4) is used to record the execution state (0 indicated AArch64 and 1 indicates AArch32).

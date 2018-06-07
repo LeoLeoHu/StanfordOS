@@ -1,0 +1,2 @@
+The exception (timer interrupt) will ne token to a higher exception level (EL1).
+Therefore the CPU jump to VBAR_EL1 + 0x480.
