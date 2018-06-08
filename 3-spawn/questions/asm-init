@@ -1,0 +1,4 @@
+2:
+    sp points to the _start
+3:
+    clean __bss
