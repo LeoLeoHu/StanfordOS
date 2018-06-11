@@ -42,6 +42,42 @@ pub struct Info {
 /// the value of the exception syndrome register. Finally, `tf` is a pointer to
 /// the trap frame for the exception.
 #[no_mangle]
-pub extern fn handle_exception(info: Info, esr: u32, tf: &mut TrapFrame) {
-    unimplemented!("handle_exception")
+pub extern "C" fn handle_exception(info: Info, esr: u32, tf: &mut TrapFrame) {
+    let syndrome = Syndrome::from(esr);
+    if info.kind == Kind::Synchronous {
+        // syndrome is only valid with sync
+        match syndrome {
+            Syndrome::Brk(_) => {
+                kprintln!("Got {:?} from {:?}", syndrome, info.source);
+                shell::shell(" [brk]$ ");
+                tf.elr += 4; // Skip the current brk instruction
+                return;
+            }
+
+            Syndrome::Svc(syscall) => {
+                handle_syscall(syscall, tf);
+                return;
+            }
+            _ => {}
+        }
+    } else if info.kind == Kind::Irq {
+        let controller = Controller::new();
+        use self::Interrupt::*;
+        for interrupt in [Timer1, Timer3, Usb, Gpio0, Gpio1, Gpio2, Gpio3, Uart].iter() {
+            if controller.is_pending(*interrupt) {
+                handle_irq(*interrupt, tf);
+                return;
+            }
+        }
+    }
+    // should not be here
+    kprintln!(
+        "Unhandled exception with info: {:?}, syndrome: {:?}, tf: {:?}",
+        info,
+        syndrome,
+        tf
+    );
+    loop {
+        unsafe { asm!("wfe") }
+    }
 }

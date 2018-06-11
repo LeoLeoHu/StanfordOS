@@ -148,8 +148,8 @@ context_save:
     mrs x1, ELR_EL1
     stp x1, x2, [SP, #-16]!
     
-    mrs x1, ESR_EL1
-    mov x2, sp
+    mrs x1, ESR_EL1 // esr
+    mov x2, sp  // tf is ap
     mov x28, lr // save lr to a callee-saved register
 
     bl handle_exception
