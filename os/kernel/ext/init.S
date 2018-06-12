@@ -39,7 +39,7 @@ switch_to_el2:
     mov     x2, #0x3c9
     msr     SPSR_EL3, x2
     adr     x2, switch_to_el1
-    msr     ELR_EL3, x2
+    msr     Elr_EL3, x2
     eret
 
 switch_to_el1:
@@ -69,10 +69,10 @@ switch_to_el1:
     orr     x0, x0, #(0b11 << 20)
     msr     CPACR_EL1, x0
 
-    // Set SCTLR to known state (RES1: 11, 20, 22, 23, 28, 29) (A53: 4.3.30)
+    // Set SCTlr to known state (RES1: 11, 20, 22, 23, 28, 29) (A53: 4.3.30)
     mov     x2, #0x0800
-    movk    x2, #0x30d0, lsl #16
-    msr     SCTLR_EL1, x2
+    movk    x2, #0lrd0, lsl #16
+    msr     SCTlr_EL1, x2
 
     // set up exception handlers
     adr     x2, _vectors
@@ -82,7 +82,7 @@ switch_to_el1:
     mov     x2, #0x3c5
     msr     SPSR_EL2, x2
     adr     x2, set_stack
-    msr     ELR_EL2, x2
+    msr     Elr_EL2, x2
     eret
 
 set_stack:
@@ -145,7 +145,7 @@ context_save:
     stp x1, x2, [SP, #-16]!
 
     mrs x2, SPSR_EL1
-    mrs x1, ELR_EL1
+    mrs x1, Elr_EL1
     stp x1, x2, [SP, #-16]!
     
     mrs x1, ESR_EL1 // esr
@@ -158,46 +158,45 @@ context_save:
 
 .global context_restore
 context_restore:
-    ldp x1, x2, [SP], #16
-    msr ELR_EL1, x1
+    ldp     x1, x2, [SP], #16
+    msr Elr_EL1, x1
     msr SPSR_EL1, x2
-
-    ldp x1, x2, [SP], #16
+    ldp     x1, x2, [SP], #16
     msr SP_EL0, x1
     msr TPIDR_EL0, x2
-    
-    ldp q0, q1, [SP], #32
-    ldp q2, q3, [SP], #32
-    ldp q4, q5, [SP], #32
-    ldp q6, q7, [SP], #32
-    ldp q8, q9, [SP], #32
-    ldp q10, q11, [SP], #32
-    ldp q12, q13, [SP], #32
-    ldp q14, q15, [SP], #32
-    ldp q16, q17, [SP], #32
-    ldp q18, q19, [SP], #32
-    ldp q20, q21, [SP], #32
-    ldp q22, q23, [SP], #32
-    ldp q24, q25, [SP], #32
-    ldp q26, q27, [SP], #32
-    ldp q28, q29, [SP], #32
-    ldp q30, q31, [SP], #32
-    
-    ldp x1, x2, [SP], #16
-    ldp x3, x4, [SP], #16
-    ldp x5, x6, [SP], #16
-    ldp x7, x8, [SP], #16
-    ldp x9, x10, [SP], #16
-    ldp x11, x12, [SP], #16
-    ldp x13, x14, [SP], #16
-    ldp x15, x16, [SP], #16
-    ldp x17, x18, [SP], #16
-    ldp x19, x20, [SP], #16
-    ldp x21, x22, [SP], #16
-    ldp x23, x24, [SP], #16
-    ldp x25, x26, [SP], #16
-    ldp x27, x28, [SP], #16
-    ldr x29, [SP], #16
+
+    ldp     q0, q1, [SP], #32
+    ldp     q2, q3, [SP], #32
+    ldp     q4, q5, [SP], #32
+    ldp     q6, q7, [SP], #32
+    ldp     q8, q9, [SP], #32
+    ldp     q10, q11, [SP], #32
+    ldp     q12, q13, [SP], #32
+    ldp     q14, q15, [SP], #32
+    ldp     q16, q17, [SP], #32
+    ldp     q18, q19, [SP], #32
+    ldp     q20, q21, [SP], #32
+    ldp     q22, q23, [SP], #32
+    ldp     q24, q25, [SP], #32
+    ldp     q26, q27, [SP], #32
+    ldp     q28, q29, [SP], #32
+    ldp     q30, q31, [SP], #32
+
+    ldp     x1, x2, [SP], #16
+    ldp     x3, x4, [SP], #16
+    ldp     x5, x6, [SP], #16
+    ldp     x7, x8, [SP], #16
+    ldp     x9, x10, [SP], #16
+    ldp     x11, x12, [SP], #16
+    ldp     x13, x14, [SP], #16
+    ldp     x15, x16, [SP], #16
+    ldp     x17, x18, [SP], #16
+    ldp     x19, x20, [SP], #16
+    ldp     x21, x22, [SP], #16
+    ldp     x23, x24, [SP], #16
+    ldp     x25, x26, [SP], #16
+    ldp     x27, x28, [SP], #16
+    ldr     x29, [SP], #16
     ret
 
 #define HANDLER(source, kind) \

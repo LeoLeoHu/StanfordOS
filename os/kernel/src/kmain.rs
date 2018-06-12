@@ -4,10 +4,11 @@
 #![feature(asm)]
 #![feature(optin_builtin_traits)]
 #![feature(decl_macro)]
-#![feature(repr_align)]
+// #![feature(repr_align)]
 #![feature(attr_literals)]
 #![feature(exclusive_range_pattern)]
 #![feature(alloc, allocator_api, global_allocator)]
+#![feature(ptr_internals)]
 
 #[macro_use]
 #[allow(unused_imports)]
@@ -26,10 +27,13 @@ pub mod fs;
 #[cfg(not(test))]
 use allocator::Allocator;
 use fs::FileSystem;
+use console::kprintln;
+use std::fmt::Write;
 use pi::timer::spin_sleep_ms;
+use pi::timer::current_time;
 use pi::gpio::Gpio;
 use pi::atags::*;
-use console::kprintln;
+use pi::uart::MiniUart;
 
 #[cfg(not(test))]
 #[global_allocator]
@@ -41,12 +45,26 @@ pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
 #[cfg(not(test))]
 pub extern "C" fn kmain() {
     spin_sleep_ms(5000);
-
     ALLOCATOR.initialize();
+    // check_atags();
+    // check_allocator();
+    // check_gpio();
 
-    check_atags();
-    check_allocator();
-    check_gpio();
+    FILE_SYSTEM.initialize();
+    spin_sleep_ms(200);
+    SCHEDULER.start();
+}
+
+pub extern "C" fn shell_thread_1() {
+    loop {
+        shell::shell("$ ");
+    }
+}
+
+pub extern "C" fn shell_thread_2() {
+    loop {
+        shell::shell("# ");
+    }
 }
 
 fn check_atags() {
