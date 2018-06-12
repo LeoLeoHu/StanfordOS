@@ -80,14 +80,14 @@ unsafe impl<R: Wrapper> Send for Unique<R> where <R as Wrapper>::Inner: Send {  
 unsafe impl<R: Wrapper> Sync for Unique<R> where <R as Wrapper>::Inner: Sync {  }
 
 impl<T, R: Readable<T>> Readable<T> for Unique<R> {
-    #[inline(always)]
+    // #[inline(always)]
     fn inner(&self) -> *const T {
         self.0.inner()
     }
 }
 
 impl<T, R: Writeable<T>> Writeable<T> for Unique<R> {
-    #[inline(always)]
+    // #[inline(always)]
     fn inner(&mut self) -> *mut T {
         self.0.inner()
     }

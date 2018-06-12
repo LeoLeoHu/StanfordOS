@@ -1,6 +1,6 @@
 use traps::TrapFrame;
 use process::{State, Stack};
-// use std::mem::replace;
+use std::mem::replace;
 
 /// Type alias for the type of a process ID.
 pub type Id = u64;
@@ -48,19 +48,22 @@ impl Process {
     ///
     /// Returns `false` in all other cases.
     pub fn is_ready(&mut self) -> bool {
-            if let State::Ready = self.state {
+        if let State::Ready = self.state {
+            true
+        } else if let State::Running = self.state {
+            false
+        } else {
+            let state = replace(&mut self.state, State::Ready);
+            if let State::Waiting(mut event_poll_fn) = state {
+                if event_poll_fn(self) {
                     true
-            } else if let State::Running = self.state {
+                } else {
+                    self.state = State::Waiting(event_poll_fn);
                     false
+                }
             } else {
-                    // if let State::Waiting(mut event_poll_fn) = state {
-                    if event_poll_fn(self) {
-                            let state = replace(&mut self.state, State::Ready);
-                            true
-                    } else {
-                            self.state = State::Waiting(event_poll_fn);
-                            false
-                    }
+                unreachable!();
             }
-            }
+        }
     }
+}
