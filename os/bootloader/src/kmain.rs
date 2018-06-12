@@ -1,13 +1,28 @@
 #![feature(asm, lang_items)]
-
-extern crate xmodem;
+#![feature(alloc, allocator_api, global_allocator)]
+#![feature(optin_builtin_traits)]
+#![feature(const_fn)]
+#![feature(decl_macro)]
+#![feature(core_intrinsics)]
+extern crate alloc;
 extern crate pi;
+extern crate xmodem;
 
 use std::io;
 use std::io::Write;
 use pi::uart::MiniUart;
 
+pub mod mutex;
+pub mod console;
+pub mod allocator;
 pub mod lang_items;
+
+#[cfg(not(test))]
+use allocator::Allocator;
+
+#[cfg(not(test))]
+#[global_allocator]
+pub static ALLOCATOR: Allocator = Allocator::uninitialized();
 
 /// Start address of the binary to load and of the bootloader.
 const BINARY_START_ADDR: usize = 0x80000;
