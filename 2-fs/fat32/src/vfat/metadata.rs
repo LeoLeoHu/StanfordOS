@@ -20,15 +20,14 @@ pub struct Attributes(u8);
 /// A structure containing a date and time.
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct Timestamp {
-    pub date: Date,
-    pub time: Time
+    pub(super) date: Date,
+    pub(super) time: Time
 }
 
 /// Metadata for a directory entry.
 #[repr(C, packed)]
 #[derive(Copy, Default, Clone)]
 pub struct Metadata {
-    // FIXME: Fill me in.
     pub(super) attributes: Attributes,
     __r1: u8,
     creation_time_tenths_seconds: u8,

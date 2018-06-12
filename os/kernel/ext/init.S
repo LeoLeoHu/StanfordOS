@@ -71,7 +71,7 @@ switch_to_el1:
 
     // Set SCTlr to known state (RES1: 11, 20, 22, 23, 28, 29) (A53: 4.3.30)
     mov     x2, #0x0800
-    movk    x2, #0lrd0, lsl #16
+    movk    x2, #0x30d0, lsl #16
     msr     SCTlr_EL1, x2
 
     // set up exception handlers
@@ -107,7 +107,7 @@ go_kmain:
     b       halt
 
 context_save:
-    stp x29, lr, [SP, #-16]! 
+    stp x29, x30, [SP, #-16]! 
     stp x27, x28, [SP, #-16]!
     stp x25, x26, [SP, #-16]!
     stp x23, x24, [SP, #-16]!
@@ -150,11 +150,11 @@ context_save:
     
     mrs x1, ESR_EL1 // esr
     mov x2, sp  // tf is ap
-    mov x28, lr // save lr to a callee-saved register
+    mov x28, x30 // save lr to a callee-saved register
 
     bl handle_exception
     
-    mov lr, x28 // get current lr from r28.
+    mov x30, x28 // get current lr from r28.
 
 .global context_restore
 context_restore:
@@ -201,11 +201,11 @@ context_restore:
 
 #define HANDLER(source, kind) \
     .align 7; \
-    stp     lr, x0, [SP, #-16]!; \
+    stp     x30, x0, [SP, #-16]!; \
     mov     x0, ##source; \
     movk    x0, ##kind, LSL #16; \
     bl      context_save; \
-    ldp     lr, x0, [SP], #16; \
+    ldp     x30, x0, [SP], #16; \
     eret
 
 .align 11

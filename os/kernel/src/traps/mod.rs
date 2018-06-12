@@ -11,6 +11,7 @@ use console::kprintln;
 use self::syndrome::Syndrome;
 use self::irq::handle_irq;
 use self::syscall::handle_syscall;
+use shell;
 
 #[repr(u16)]
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]

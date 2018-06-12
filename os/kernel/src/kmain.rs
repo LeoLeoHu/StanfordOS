@@ -4,11 +4,21 @@
 #![feature(asm)]
 #![feature(optin_builtin_traits)]
 #![feature(decl_macro)]
-// #![feature(repr_align)]
+#![feature(repr_align)]
 #![feature(attr_literals)]
+
 #![feature(exclusive_range_pattern)]
+#![feature(i128_type)]
+#![feature(never_type)]
+#![feature(unique)]
+#![feature(pointer_methods)]
+#![feature(naked_functions)]
+#![feature(fn_must_use)]
 #![feature(alloc, allocator_api, global_allocator)]
+
+#![feature(never_type)]
 #![feature(ptr_internals)]
+#![feature(pointer_methods)]
 
 #[macro_use]
 #[allow(unused_imports)]
@@ -23,23 +33,25 @@ pub mod mutex;
 pub mod console;
 pub mod shell;
 pub mod fs;
+pub mod traps;
+pub mod aarch64;
+pub mod process;
+pub mod vm;
 
 #[cfg(not(test))]
 use allocator::Allocator;
 use fs::FileSystem;
+use process::GlobalScheduler;
 use console::kprintln;
-use std::fmt::Write;
 use pi::timer::spin_sleep_ms;
-use pi::timer::current_time;
 use pi::gpio::Gpio;
 use pi::atags::*;
-use pi::uart::MiniUart;
 
 #[cfg(not(test))]
 #[global_allocator]
 pub static ALLOCATOR: Allocator = Allocator::uninitialized();
-
 pub static FILE_SYSTEM: FileSystem = FileSystem::uninitialized();
+pub static SCHEDULER: GlobalScheduler = GlobalScheduler::uninitialized();
 
 #[no_mangle]
 #[cfg(not(test))]
